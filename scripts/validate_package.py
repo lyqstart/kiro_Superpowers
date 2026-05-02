@@ -29,6 +29,7 @@ required = [
     'power/steering/kiro-task-refinement-gate.md',
     'power/steering/subagent-task-packet.md',
     'power/steering/review-evidence-contract.md',
+    'power/steering/debugging-deep-techniques.md',
     'workspace-assets/.kiro/steering/superpowers-discipline.md',
     'workspace-assets/.kiro/steering/superpowers-status-banner.md',
     'workspace-assets/.kiro/steering/superpowers-router.md',
@@ -46,6 +47,7 @@ required = [
     'workspace-assets/.kiro/steering/superpowers-kiro-task-refinement-gate.md',
     'workspace-assets/.kiro/steering/superpowers-subagent-task-packet.md',
     'workspace-assets/.kiro/steering/superpowers-review-evidence-contract.md',
+    'workspace-assets/.kiro/steering/superpowers-debugging-deep-techniques.md',
     'workspace-assets/.kiro/hooks/00-sp-pre-task-gate.kiro.hook',
     'workspace-assets/.kiro/hooks/01-sp-post-task-verification.kiro.hook',
     'workspace-assets/.kiro/hooks/02-sp-agent-stop-sanity-check.kiro.hook',
@@ -69,6 +71,9 @@ required = [
     'workspace-assets/.kiro/hooks/20-sp-worktree-hardening.kiro.hook',
     'workspace-assets/.kiro/hooks/21-sp-baseline-verification-hardening.kiro.hook',
     'workspace-assets/.kiro/hooks/22-sp-branch-finishing-hardening.kiro.hook',
+    'workspace-assets/.kiro/hooks/23-sp-root-cause-tracing.kiro.hook',
+    'workspace-assets/.kiro/hooks/24-sp-debugging-deep-techniques.kiro.hook',
+    'workspace-assets/.kiro/hooks/25-sp-architecture-stop-gate.kiro.hook',
     'workspace-assets/.kiro/agents/sp-implementer.md',
     'workspace-assets/.kiro/agents/sp-spec-reviewer.md',
     'workspace-assets/.kiro/agents/sp-code-reviewer.md',
@@ -93,7 +98,7 @@ for rel in required:
 
 # Hook JSON must parse and follow stable numbering/name.
 hook_dir = root / 'workspace-assets/.kiro/hooks'
-expected_hook_count = 23
+expected_hook_count = 26
 hooks = sorted(hook_dir.glob('*.kiro.hook')) if hook_dir.exists() else []
 if len(hooks) != expected_hook_count:
     errors.append(f'Expected {expected_hook_count} hooks, found {len(hooks)}')
@@ -128,7 +133,7 @@ for token in [
     '【Kiro规格主控', '【Superpowers执行纪律', 'Parallel Dispatch Plan',
     'task execution contract', 'task completion contract', 'COMPLETE / NOT COMPLETE / BLOCKED',
     'TDD Evidence', 'RED 验证命令', 'GREEN 验证命令', 'Kiro Task Refinement Gate', 'Task Refinement Gate', '任务拆分',
-    'Subagent Task Packet', 'Subagent Result Contract', 'Review Evidence Contract', 'BASE_SHA', 'HEAD_SHA', 'Changed files', 'Worktree hardening', 'Branch finishing hardening', 'baseline verification', 'worktree metadata', 'DISCARD_WORK', 'CLEAN_WORKTREE'
+    'Subagent Task Packet', 'Subagent Result Contract', 'Review Evidence Contract', 'BASE_SHA', 'HEAD_SHA', 'Changed files', 'Worktree hardening', 'Branch finishing hardening', 'baseline verification', 'worktree metadata', 'DISCARD_WORK', 'CLEAN_WORKTREE', 'root-cause-tracing', 'defense-in-depth', 'condition-based-waiting', 'multi-component diagnostics', 'architecture stop gate'
 ]:
     if token not in combined:
         errors.append(f'Compatibility/user-experience token missing: {token}')
@@ -144,16 +149,16 @@ for token in [
     'Parallel Dispatch Plan', 'kiro-task-execution-contract.md', 'task-completion-contract.md',
     'tdd-evidence-contract.md', 'v0.9.0 TDD Evidence Contract', 'RED/GREEN/REFACTOR',
     'kiro-task-refinement-gate.md', 'v1.0.0 Kiro Task Refinement Gate', 'Task Refinement Gate',
-    'subagent-task-packet.md', 'review-evidence-contract.md', 'v1.1.0 Subagent Task Packet', 'Review Evidence Contract', 'Git diff evidence', 'worktree-hardening.md', 'branch-finishing-hardening.md', 'v1.2.0 Worktree / Branch Finishing Hardening', 'baseline verification', 'worktree metadata'
+    'subagent-task-packet.md', 'review-evidence-contract.md', 'v1.1.0 Subagent Task Packet', 'Review Evidence Contract', 'Git diff evidence', 'worktree-hardening.md', 'branch-finishing-hardening.md', 'v1.2.0 Worktree / Branch Finishing Hardening', 'baseline verification', 'worktree metadata', 'debugging-deep-techniques.md', 'v1.3.0 Debugging Deep Techniques', 'root-cause-tracing', 'defense-in-depth', 'condition-based-waiting', 'multi-component diagnostics', 'architecture stop gate'
 ]:
     if token not in matrix:
         errors.append(f'Matrix missing capability/token: {token}')
 
 # Version docs must mention v1.2.0 and upgrade path.
 for rel, tokens in {
-    'CHANGELOG.md': ['v1.2.0', 'Worktree hardening', '20-sp-worktree-hardening'],
-    'MIGRATION.md': ['从 v1.1.0 升级到 v1.2.0', 'v1.2.0 只增强 worktree', '原安装提示不变'],
-    'README.md': ['Kiro Superpowers Discipline v1.2.0', 'v1.2.0 是 Worktree / Branch Finishing Hardening 版本'],
+    'CHANGELOG.md': ['v1.3.0', 'root-cause-tracing', '23-sp-root-cause-tracing'],
+    'MIGRATION.md': ['从 v1.2.0 升级到 v1.3.0', 'v1.3.0 只增强深度调试纪律', '原安装提示不变'],
+    'README.md': ['Kiro Superpowers Discipline v1.3.0', 'v1.3.0 是 Debugging Deep Techniques 版本'],
 }.items():
     text = (root / rel).read_text(encoding='utf-8') if (root / rel).exists() else ''
     for token in tokens:
@@ -181,7 +186,7 @@ for rel in ['README.md', 'INSTALL.md', 'INSTALL_FOR_KIRO.md', 'USAGE.md', 'MIGRA
     p = root / rel
     if p.exists():
         text = p.read_text(encoding='utf-8')
-        for stale in ['kiro_superpowers_discipline_v1_0_0', 'kiro_superpowers_discipline_v1_1_0']:
+        for stale in ['kiro_superpowers_discipline_v1_0_0', 'kiro_superpowers_discipline_v1_1_0', 'kiro_superpowers_discipline_v1_2_0']:
             if stale in text:
                 errors.append(f'Stale package path in {rel}: {stale}')
 
@@ -209,3 +214,4 @@ print('- v0.9 TDD evidence contract files: PASS')
 print('- v1.0 task refinement gate files: PASS')
 print('- v1.1 subagent task packet/review evidence files: PASS')
 print('- v1.2 worktree/branch finishing hardening files: PASS')
+print('- v1.3 debugging deep techniques files: PASS')

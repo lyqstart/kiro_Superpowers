@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore", "root-cause-tracing", "defense-in-depth", "condition-based-waiting", "multi-component diagnostics", "architecture stop gate", "根因链路", "多层防护", "条件等待", "多组件诊断", "三次修复失败"
 ]
 author: "ChatGPT generated adapter"
-version: "1.2.0"
+version: "1.3.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -426,3 +426,16 @@ Next step: ...
 Review 必须基于实际证据：BASE_SHA、HEAD_SHA、changed files、requirement/design/task coverage。无法获取 SHA 时必须说明原因。所有 review issue 必须分为 blocker / major / minor / question。blocker/major 必须修复并重新 review；question 必须暂停提问，不许猜。
 
 完整规则见 `subagent-task-packet.md` 和 `review-evidence-contract.md`。
+
+
+## v1.3 Debugging Deep Techniques
+
+Bugfix/debugging work must go beyond reproduction and minimal repair. Apply deep debugging rules when relevant:
+
+- Root-cause tracing: trace observable error → input/trigger → data change → first bad component/output → failing condition → root cause. If root cause is unknown, return `BLOCKED` or `NEEDS_CONTEXT`; do not patch symptoms.
+- Defense in depth: decide whether input validation, boundary handling, dependency failure handling, async state handling, or API/database contract checks are needed. Do not add out-of-scope defensive rewrites.
+- Condition-based waiting: for async jobs, queues, generated files, network calls, UI waits, or flaky tests, do not use blind fixed sleep as the main solution. Define condition, timeout, and failure diagnostics.
+- Multi-component diagnostics: for frontend/backend/database/cache/queue/API bugs, diagnose each component boundary and mark root-cause component vs affected components.
+- Three-fix architecture stop gate: after three failed fixes for the same issue, stop patching and reassess requirement, root cause, architecture assumptions, verification method, and whether to return to Kiro spec/design.
+
+`sp-debugger` must output root-cause chain, hypothesis validation, defense-in-depth decision, condition-based waiting decision, multi-component diagnostics when relevant, fix attempt count, and architecture stop-gate status.

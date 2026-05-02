@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 24 - Debugging Deep Techniques",
+  "description": "Require defense-in-depth analysis, condition-based waiting, and multi-component diagnostics when the bug context calls for them.",
+  "version": "1",
+  "when": {
+    "type": "manual"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.3 Debugging Deep Techniques. For bugfixes, evaluate defense in depth: input validation, boundary conditions, external dependencies, async states, API/database assumptions. For async or flaky behavior, avoid fixed sleep as the main mechanism; use condition-based waiting with timeout and failure diagnostics. For frontend/backend/database/cache/queue/external API bugs, provide a component-boundary diagnostic table and mark root-cause vs affected components."
+  }
+}

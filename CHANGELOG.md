@@ -1,5 +1,27 @@
 # CHANGELOG
 
+## v1.3.0
+
+新增：
+
+1. root-cause-tracing：debug 时必须从可观察错误追踪到根因，说明输入、数据变化、异常组件、触发条件和根因证据；没有根因结论不允许进入修复阶段。
+2. defense-in-depth：修复 bug 时必须判断是否需要输入、边界、外部依赖、异常状态、契约假设等多层防护；不能只在一个点打补丁。
+3. condition-based-waiting：涉及异步任务、队列、后台任务、文件生成、网络请求、测试等待时，禁止把固定 sleep 作为主要方案，必须优先使用条件等待、超时和失败诊断。
+4. multi-component diagnostics：涉及前端、后端、数据库、缓存、任务队列、外部 API 多组件时，必须按组件边界诊断，标记根因组件和受影响组件。
+5. 3-fix failure architecture stop gate：同一问题连续修复 3 次仍失败时，必须停止，重新质疑需求、根因、架构假设、测试方式或是否回到 design/spec 阶段。
+6. 增强 `sp-debugger`：增加根因链路、假设验证记录、防护判断、条件等待判断、多组件诊断、修复失败计数和 architecture stop gate 状态。
+7. 新增 hooks：`23-sp-root-cause-tracing.kiro.hook`、`24-sp-debugging-deep-techniques.kiro.hook`、`25-sp-architecture-stop-gate.kiro.hook`。
+8. 新增 steering：`debugging-deep-techniques.md` 和对应 workspace steering。
+
+保持兼容：
+
+- v0.2-v1.2 的安装方式不变。
+- v0.2-v1.2 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4-v1.2 的 worktree、branch finishing、subagent、review、parallel、task、TDD、refinement、review evidence 能力保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
 ## v1.2.0
 
 新增：

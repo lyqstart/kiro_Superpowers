@@ -128,3 +128,22 @@ REFACTOR 记录或无需重构原因
 现象：review 只给了泛泛建议，没有 changed files、BASE_SHA/HEAD_SHA、requirement/design/task coverage。
 
 处理：要求 Kiro 重新执行 Review Evidence Contract。没有实际 diff 或 changed files 的 review 不能作为完成依据。
+
+
+## 调试时一直修不好
+
+如果同一个问题连续修复 3 次仍失败，v1.3 要求停止继续打补丁。你应该看到 architecture stop gate 输出：
+
+```text
+是否理解错需求？
+是否定位错根因？
+是否架构假设错误？
+是否测试方式错误？
+是否应该回到 design/spec 阶段？
+```
+
+这不是拖慢开发，而是防止 AI 在错误方向上连续堆补丁。
+
+## Agent 使用固定 sleep 修异步问题
+
+v1.3 要求优先使用 condition-based waiting。正确输出应说明等待条件、超时策略和失败诊断。固定 sleep 只能作为最后的辅助措施，不能作为主要方案。

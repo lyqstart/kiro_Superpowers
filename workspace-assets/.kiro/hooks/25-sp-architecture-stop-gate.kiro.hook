@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 25 - Architecture Stop Gate",
+  "description": "If the same issue has failed after three fixes, stop patching and reconsider requirement, root cause, architecture, verification, or spec/design.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.3 Three-Fix Architecture Stop Gate. If the same issue has had three failed fix attempts, do not attempt another patch. Report fix attempt count, whether the requirement may be misunderstood, whether the root cause may be wrong, whether architecture assumptions may be wrong, whether verification may be wrong, and whether to return to Kiro design/spec. Ask the user one focused numbered question if needed."
+  }
+}

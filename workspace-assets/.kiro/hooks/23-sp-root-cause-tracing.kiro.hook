@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 23 - Root Cause Tracing",
+  "description": "For bugfix/debugging work, require observable failure, data/component trace, verified root-cause hypothesis, and no symptom-only patching.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.3 Root-Cause Tracing before fixing. For bugfix/debugging work, show observable error, input/trigger, expected behavior, actual behavior, where data changes, first bad component/output, failing condition, root cause, and evidence. If root cause is unknown, return BLOCKED or NEEDS_CONTEXT and do not edit code. Do not patch symptoms."
+  }
+}
