@@ -151,3 +151,10 @@ REFACTOR：有/无 + 原因 + 验证结果
 ```
 
 没有 RED 失败证据和 GREEN 通过证据，不允许把行为变更、bugfix 或新功能标记为 COMPLETE。无法 TDD 时必须说明原因、给出替代验证方案，并等待用户确认。
+
+
+## v1.1 Subagent Task Packet / Review Evidence
+
+Kiro main agent 派发任何 `sp-*` subagent 前，必须构造 Subagent Task Packet，包含 spec、requirement、design section、task、范围、允许/禁止修改、验证命令、预期输出和完成定义。
+
+每个 subagent 必须按 Subagent Result Contract 返回结果。spec/code review 必须基于 changed files、BASE_SHA/HEAD_SHA（如可用）和 requirement/design/task coverage，不允许空泛 review。

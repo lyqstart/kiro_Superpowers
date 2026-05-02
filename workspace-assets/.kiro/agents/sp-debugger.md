@@ -29,3 +29,7 @@ Verification command: ...
 Result: ...
 Next step: sp-implementer / sp-test-verifier / needs user input
 ```
+
+## v1.1 Subagent Packet Rule
+
+For bugfix work, require a task packet that includes observed behavior, expected behavior, unchanged behavior, reproduction command/steps, linked requirement/design/task if available, allowed files, forbidden files, and verification command. If reproduction context is missing, return `NEEDS_CONTEXT` before editing.

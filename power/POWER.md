@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence"
 ]
 author: "ChatGPT generated adapter"
-version: "1.0.0"
+version: "1.1.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -289,6 +289,8 @@ This version is a stabilization release. Keep the user experience simple:
 - `task-by-task-subagent-loop.md`
 - `review-feedback-loop.md`
 - `parallel-agent-policy.md`
+- `subagent-task-packet.md`
+- `review-evidence-contract.md`
 
 ## 安装请求处理
 
@@ -379,3 +381,31 @@ REFACTOR：有/无 + 原因 + 验证结果
 Task Refinement Gate 必须早于 worktree gate、TDD Evidence Contract、subagent task loop 和 task completion contract。
 
 完整规则见 `kiro-task-refinement-gate.md`。
+
+
+## v1.1 Subagent Task Packet and Review Evidence
+
+Kiro main agent 派发任何 `sp-*` subagent 前，必须构造标准 Subagent Task Packet。不能把一句模糊任务直接丢给 subagent。
+
+任务包必须包含：spec、requirement、design section、task 编号、task 原文、目标、范围、不做范围、允许修改、禁止修改、验证命令、预期输出、完成定义和 TDD/Git evidence 要求。
+
+每个 subagent 必须返回 Subagent Result Contract：
+
+```text
+SP Agent Result: <agent-name>
+Status: DONE / BLOCKED / NEEDS_CONTEXT / FAILED
+Task: ...
+Spec: ...
+Requirement/design/task coverage: ...
+Completed work: ...
+Changed files: ...
+Verification command: ...
+Verification result: ...
+Risks: ...
+Needs main-agent decision: ...
+Next step: ...
+```
+
+Review 必须基于实际证据：BASE_SHA、HEAD_SHA、changed files、requirement/design/task coverage。无法获取 SHA 时必须说明原因。所有 review issue 必须分为 blocker / major / minor / question。blocker/major 必须修复并重新 review；question 必须暂停提问，不许猜。
+
+完整规则见 `subagent-task-packet.md` 和 `review-evidence-contract.md`。

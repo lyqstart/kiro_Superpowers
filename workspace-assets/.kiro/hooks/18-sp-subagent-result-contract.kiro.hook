@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 18 - Subagent Result Contract Gate",
+  "description": "Require all sp-* subagents to return standardized result blocks so the main agent can safely decide the next step.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If the response reports subagent work, ensure each subagent result uses the Subagent Result Contract: SP Agent Result, Status DONE/BLOCKED/NEEDS_CONTEXT/FAILED, Task, Spec, requirement/design/task coverage, completed work, changed files, verification command, verification result, risks, needs main-agent decision, and next step. Missing result evidence means the task is not complete."
+  }
+}

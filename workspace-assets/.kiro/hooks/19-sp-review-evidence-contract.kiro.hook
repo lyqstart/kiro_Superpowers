@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 19 - Review Evidence Contract Gate",
+  "description": "Ensure spec/code reviews are based on real changed files, git diff evidence when available, and blocker/major/minor/question classification.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before marking review complete, provide Review Evidence: BASE_SHA if available, HEAD_SHA if available, changed files, requirement/design/task coverage, blockers, major issues, minor issues, questions, required fixes, and whether re-review is required. If SHA cannot be obtained, state why. Do not accept空泛 review that is not tied to actual diff or changed files."
+  }
+}

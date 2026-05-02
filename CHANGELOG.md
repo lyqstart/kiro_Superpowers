@@ -1,5 +1,33 @@
 # CHANGELOG
 
+## v1.1.0
+
+新增：
+
+1. Subagent Task Packet：Kiro main agent 派发 subagent 前必须构造标准任务包，包含 spec、requirement、design section、task、目标、范围、允许/禁止修改、验证命令、预期输出和完成定义。
+2. Subagent Result Contract：所有 `sp-*` subagent 必须返回统一 `SP Agent Result` 格式，包含 `DONE / BLOCKED / NEEDS_CONTEXT / FAILED` 状态、改动文件、验证命令、验证结果、风险和需要 main agent 决策的问题。
+3. Review Evidence Contract：spec/code review 必须基于 changed files、requirement/design/task coverage 和 Git diff evidence；所有问题必须分级为 blocker/major/minor/question。
+4. Git diff evidence：review 前尽量记录 BASE_SHA，review 后尽量记录 HEAD_SHA；无法获取 SHA 必须说明原因。
+5. 增强 agents：更新 `sp-implementer`、`sp-test-verifier`、`sp-spec-reviewer`、`sp-code-reviewer`、`sp-debugger`、`sp-review-feedback-handler` 输出格式。
+6. 新增 hooks：`17-sp-subagent-task-packet.kiro.hook`、`18-sp-subagent-result-contract.kiro.hook`、`19-sp-review-evidence-contract.kiro.hook`。
+7. 新增 steering：`subagent-task-packet.md`、`review-evidence-contract.md` 和对应 workspace steering。
+
+保持兼容：
+
+- v0.2-v1.0 的安装方式不变。
+- v0.2-v1.0 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4 worktree 和 branch finishing 保持不变。
+- v0.5 subagent task loop 和 review feedback loop 保持不变。
+- v0.6 parallel agents 安全策略保持不变。
+- v0.7 task execution/completion contract 保持不变。
+- v0.8 稳定化文档和校验保持不变。
+- v0.9 TDD Evidence Contract 保持不变。
+- v1.0 Task Refinement Gate 保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
+
 ## v1.0.0
 
 新增：
@@ -25,7 +53,7 @@
 - 不要求用户写长提示词。
 
 
-## v1.0.0
+## v0.9.0
 
 新增：
 

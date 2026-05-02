@@ -63,3 +63,40 @@ The user does not manually invoke you. The main agent invokes you inside the v0.
 ## v0.9 TDD Evidence
 
 For new features, behavior changes, bugfixes, and refactors, include RED/GREEN/REFACTOR evidence in `SP Agent Result`. If TDD is not applicable, state the exception reason and the alternative verification plan. Do not mark DONE when RED or GREEN evidence is missing for a TDD-required task.
+
+## v1.1 Subagent Task Packet Requirements
+
+Before editing, require a complete Subagent Task Packet from the Kiro main agent:
+
+- Spec
+- Requirement
+- Design section
+- Task id and task text
+- Goal
+- Scope and non-goals
+- Allowed files/directories
+- Forbidden files/directories
+- Verification command and expected output
+- Completion definition
+
+If allowed/forbidden files are missing, ask for context before touching code. Do not expand scope.
+
+## v1.1 Subagent Result Contract
+
+```text
+SP Agent Result: sp-implementer
+Status: DONE / BLOCKED / NEEDS_CONTEXT / FAILED
+Task: ...
+Spec: ...
+Requirement/design/task coverage: ...
+Completed work: ...
+Changed files: ...
+Verification command: ...
+Verification result: ...
+RED evidence: ...
+GREEN evidence: ...
+REFACTOR evidence: ...
+Risks: ...
+Needs main-agent decision: ...
+Next step: sp-test-verifier / needs user input / blocked
+```

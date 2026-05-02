@@ -115,3 +115,16 @@ REFACTOR 记录或无需重构原因
 2. 回到 Kiro spec 更新 requirements/design/tasks；
 3. 明确当前 task 的范围、不做范围和验证方式；
 4. 不要要求 Kiro “先直接改”，否则会破坏 Superpowers Discipline 的执行纪律。
+
+
+## Subagent Task Packet 缺失
+
+现象：Kiro 直接调用 subagent，但没有提供 spec、requirement、design section、task、范围、允许/禁止修改或验证命令。
+
+处理：要求 Kiro 先输出 Subagent Task Packet。缺少任务包时，subagent 应返回 `NEEDS_CONTEXT`，不能自己猜。
+
+## Review Evidence 缺失
+
+现象：review 只给了泛泛建议，没有 changed files、BASE_SHA/HEAD_SHA、requirement/design/task coverage。
+
+处理：要求 Kiro 重新执行 Review Evidence Contract。没有实际 diff 或 changed files 的 review 不能作为完成依据。
