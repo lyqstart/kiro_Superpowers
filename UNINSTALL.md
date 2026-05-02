@@ -1,8 +1,8 @@
-# 卸载说明
+# 卸载 Kiro Superpowers Discipline v1.5.0
 
-## 最简单卸载
+## 1. 删除项目级文件
 
-在项目根目录删除这些文件：
+在项目根目录删除：
 
 ```text
 .kiro/steering/superpowers-*.md
@@ -12,29 +12,17 @@
 .kiro/scripts/sp-*.ps1
 ```
 
-然后在 Kiro Powers 面板卸载：
-
-```text
-Powers → Kiro Superpowers Discipline → Remove / Uninstall
-```
-
-最后可以删除解压目录。
-
-## Windows PowerShell
-
-在项目根目录运行：
+Windows PowerShell：
 
 ```powershell
-Remove-Item ".kiro\steering\superpowers-*.md" -Force -ErrorAction SilentlyContinue
-Remove-Item ".kiro\hooks\*sp-*.kiro.hook" -Force -ErrorAction SilentlyContinue
-Remove-Item ".kiro\agents\sp-*.md" -Force -ErrorAction SilentlyContinue
-Remove-Item ".kiro\scripts\sp-*.sh" -Force -ErrorAction SilentlyContinue
-Remove-Item ".kiro\scripts\sp-*.ps1" -Force -ErrorAction SilentlyContinue
+Remove-Item ".kiro\steering\superpowers-*.md" -Force
+Remove-Item ".kiro\hooks\*sp-*.kiro.hook" -Force
+Remove-Item ".kirogents\sp-*.md" -Force
+Remove-Item ".kiro\scripts\sp-*.sh" -Force
+Remove-Item ".kiro\scripts\sp-*.ps1" -Force
 ```
 
-## macOS/Linux
-
-在项目根目录运行：
+macOS/Linux：
 
 ```bash
 rm -f .kiro/steering/superpowers-*.md
@@ -44,18 +32,18 @@ rm -f .kiro/scripts/sp-*.sh
 rm -f .kiro/scripts/sp-*.ps1
 ```
 
-## 不会删除什么
+## 2. 卸载 Power
 
-卸载不会删除：
+在 Kiro Powers 面板中移除：
 
 ```text
-.kiro/specs/
-.kiro/steering/product.md
-.kiro/steering/tech.md
-.kiro/steering/structure.md
-你的源码
-你的 git 分支
-你的 worktree
+Kiro Superpowers Discipline / Superpowers Discipline for Kiro
 ```
 
-如果曾经创建过 git worktree，请根据自己的项目情况手动确认后再清理，不要盲删。
+## 3. 可选：删除解压目录
+
+删除本安装包解压出来的目录即可。
+
+## 注意
+
+卸载不会删除你的业务代码、Kiro specs、git 分支或 worktree。worktree 清理必须由用户明确确认后单独执行。

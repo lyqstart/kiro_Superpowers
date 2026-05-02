@@ -1,5 +1,36 @@
 # MIGRATION
 
+## 从 v1.4.0 升级到 v1.5.0
+
+v1.5.0 是稳定版整理，不新增新的开发流程能力，不改变安装、卸载和日常使用方式。
+
+### 需要做什么
+
+建议重新安装一次项目级文件，因为 v1.5.0 新增稳定输出 contract，并整理了文档和校验脚本。
+
+在 Kiro 中说：
+
+```text
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：<解压目录>
+```
+
+然后在 Kiro Powers 面板选择 `<解压目录>/power`。
+
+### 兼容性
+
+- 原安装提示不变。
+- 原卸载方式不变。
+- 原自然语言入口不变。
+- 不引入 ai_dev_os。
+- v0.9-v1.4 的 TDD、task refinement、subagent packet、review evidence、worktree/branch finishing、debugging deep techniques、fresh verification evidence 都保持不变。
+
+### 新增/整理
+
+- 稳定状态词：DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED。
+- 标准 `SP Agent Result` 输出格式。
+- `stable-output-contract.md`。
+- validate-package.py 增强。
+
 ## 从 v1.3.0 升级到 v1.4.0
 
 升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。
@@ -176,8 +207,6 @@ workspace-assets/.kiro/agents/sp-review-feedback-handler.md
 
 ---
 
-# MIGRATION
-
 ## 从 v0.9.0 升级到 v1.0.0
 
 升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。
@@ -228,8 +257,6 @@ workspace-assets/.kiro/hooks/16-sp-scope-creep-blocker.kiro.hook
 
 ---
 
-# MIGRATION
-
 ## 从 v0.8.0 升级到 v1.0.0
 
 升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。
@@ -279,8 +306,6 @@ workspace-assets/.kiro/hooks/13-sp-tdd-verification-review.kiro.hook
 
 
 ---
-
-# MIGRATION
 
 ## 从 v0.7.0 升级到 v0.8.0
 

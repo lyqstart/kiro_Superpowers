@@ -1,5 +1,31 @@
 # CHANGELOG
 
+## v1.5.0
+
+稳定版整理，不新增新的开发流程能力。
+
+### Added
+
+- `power/steering/stable-output-contract.md`
+- `workspace-assets/.kiro/steering/superpowers-stable-output-contract.md`
+- validate-package.py 增强：动态检查所有 hooks、agents、scripts、Power、能力矩阵、安装/卸载/使用/故障排查文档、自然语言入口和 ai_dev_os 禁止项。
+
+### Changed
+
+- README / INSTALL / UNINSTALL / USAGE / TROUBLESHOOTING 总整理。
+- 统一 v0.9-v1.4 的状态词：DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED。
+- 统一 `SP Agent Result` 输出要求。
+- 更新能力矩阵到 v1.5.0。
+- 更新安装脚本版本号到 v1.5.0。
+
+### Compatibility
+
+- v0.2-v1.4 的安装方式不变。
+- v0.2-v1.4 的卸载方式不变。
+- 用户日常自然语言入口不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
 ## v1.4.0
 
 新增：

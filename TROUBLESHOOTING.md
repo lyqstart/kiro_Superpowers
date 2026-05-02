@@ -1,165 +1,79 @@
-# TROUBLESHOOTING
+# 故障排查
 
-## 1. Kiro 没有显示状态标识
+## 1. Kiro 直接开始写代码
 
-检查是否已安装 workspace 文件：
-
-```text
-.kiro/steering/superpowers-status-banner.md
-.kiro/steering/superpowers-router.md
-```
-
-并确认 Kiro Powers 面板已经添加本包的 `power/` 目录。
-
-## 2. Kiro 直接改代码，没有先走 spec/task
-
-先停止它，然后说：
+这说明 gate 没生效。你可以说：
 
 ```text
-停止。请显示当前状态标识，并说明当前是否绑定 Kiro spec/task。没有通过 task execution contract 前不要改代码。
+停止。请先显示状态标识，并说明当前是否启用 Kiro Spec 和 Superpowers执行纪律。
 ```
 
-如果仍然不生效，重新运行安装脚本并确认 Power 指向新版 `power/`。
-
-## 3. Worktree 没有创建
-
-不是所有请求都强制 worktree。文档修改、只读分析、小文本修改可以不创建。实现类任务、bugfix、重构、数据库/API 变更应进入 worktree gate。
-
-如果当前分支是 `main/master`，Kiro 不应直接开发，除非你明确确认。
-
-## 4. Branch finishing 没有出现
-
-只有代码变更任务通过 verification、spec review、code review 后，才应该给出四个选项。
-
-如果验证失败或缺失，不能进入合并选项。
-
-## 5. Subagent 没有按固定顺序执行
-
-确认这些文件存在：
+正确状态标识应包含：
 
 ```text
-.kiro/agents/sp-implementer.md
-.kiro/agents/sp-test-verifier.md
-.kiro/agents/sp-spec-reviewer.md
-.kiro/agents/sp-code-reviewer.md
-.kiro/steering/superpowers-task-by-task-subagent-loop.md
+【Kiro规格主控：...】
+【Superpowers执行纪律：启用】
+当前阶段：...
+当前流程：...
+当前Task：...
+当前Gate：...
 ```
 
-Kiro main agent 必须先读取 requirements/design/tasks，并把完整 task context 传给 subagent。
+## 2. Kiro 要求你写长提示词
 
-## 6. Review feedback 被盲目接受
-
-应使用 review feedback loop：
+这是错误用法。用户只需要说自然语言：
 
 ```text
-blocker / major / minor / question
+新增数据导出功能
+修复登录失败的问题
+继续当前 spec 的下一个任务
+检查当前任务是否真的完成
 ```
 
-question 必须暂停提问，不许猜。blocker/major 必须修复并重新 review。
+## 3. task 太大或不清楚
 
-## 7. 并行执行看起来危险
+v1.0 要求 Kiro Task Refinement Gate。task 有歧义、缺少 requirement/design 关联、缺少验证命令或完成定义时，Kiro 应暂停并给出编号拆分建议。
 
-并行前必须有 `Parallel Dispatch Plan`。如果多个任务共享文件、接口、数据库表、迁移脚本或状态机，应禁止并行 implementation。
+## 4. TDD 证据缺失
 
-## 8. 安装脚本无法运行
+v0.9 要求 TDD Evidence Contract。新功能、行为变更、bugfix 没有 RED/GREEN 证据时，不能说 COMPLETE。无法 TDD 时必须说明原因、替代验证和用户确认需求。
 
-Windows 可以尝试：
+## 5. review 很空泛
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install\install.ps1 -ProjectRoot "<项目根目录>" -Force
-```
+v1.1 要求 Review Evidence Contract。review 必须基于 changed files、BASE_SHA/HEAD_SHA（如可用）、requirement/design/task coverage，不能只给泛泛建议。
 
-macOS/Linux 可以尝试：
+## 6. worktree 或 branch finishing 看起来危险
 
-```bash
-bash ./install/install.sh "<项目根目录>"
-```
+v1.2 要求危险操作二次确认。丢弃必须显示 branch、worktree path、changed files、commits 列表，并要求明确确认。默认不删除用户代码。
 
-## 9. 如何确认包本身没问题
+## 7. 修 bug 只打补丁不查根因
 
-在解压目录运行：
+v1.3 要求 root-cause-tracing。没有根因链路时不能进入修复阶段。同一个问题三次修复失败时必须触发 architecture stop gate。
 
-```bash
-python scripts/validate_package.py
-```
+## 8. verification 失败怎么办
 
-应看到 `Compatibility validation passed`。
+v1.4 要求 Fresh Verification Evidence。验证失败时必须输出 `NOT COMPLETE` 或 `BLOCKED`，不能说 COMPLETE。无法验证时输出 `UNVERIFIED`，并说明原因、风险和下一步。
 
+## 9. 状态词混乱怎么办
 
-## TDD evidence 缺失
-
-现象：Kiro 想标记 COMPLETE，但没有 RED/GREEN/REFACTOR 证据。
-
-处理：要求 Kiro 补充：
+v1.5 统一状态词：
 
 ```text
-RED 验证命令和输出
-失败原因
-失败测试文件路径
-GREEN 验证命令和输出
-通过测试文件路径
-对应实现文件路径
-REFACTOR 记录或无需重构原因
+DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED
 ```
 
-如果任务确实无法 TDD，Kiro 必须说明例外原因、替代验证方案，并等待用户确认。
+如果 Kiro 使用其他含糊状态，你可以要求它重新按 v1.5 状态词输出。
 
+## 10. 安装不生效
 
-## Task Refinement Gate 阻塞
-
-如果 Kiro 提示 task 有歧义、太大、缺少 requirement/design 关联、缺少验证命令或缺少完成定义，这是正常保护，不是失败。
-
-处理方式：
-
-1. 选择 Kiro 给出的编号拆分方案；
-2. 回到 Kiro spec 更新 requirements/design/tasks；
-3. 明确当前 task 的范围、不做范围和验证方式；
-4. 不要要求 Kiro “先直接改”，否则会破坏 Superpowers Discipline 的执行纪律。
-
-
-## Subagent Task Packet 缺失
-
-现象：Kiro 直接调用 subagent，但没有提供 spec、requirement、design section、task、范围、允许/禁止修改或验证命令。
-
-处理：要求 Kiro 先输出 Subagent Task Packet。缺少任务包时，subagent 应返回 `NEEDS_CONTEXT`，不能自己猜。
-
-## Review Evidence 缺失
-
-现象：review 只给了泛泛建议，没有 changed files、BASE_SHA/HEAD_SHA、requirement/design/task coverage。
-
-处理：要求 Kiro 重新执行 Review Evidence Contract。没有实际 diff 或 changed files 的 review 不能作为完成依据。
-
-
-## 调试时一直修不好
-
-如果同一个问题连续修复 3 次仍失败，v1.3 要求停止继续打补丁。你应该看到 architecture stop gate 输出：
+检查：
 
 ```text
-是否理解错需求？
-是否定位错根因？
-是否架构假设错误？
-是否测试方式错误？
-是否应该回到 design/spec 阶段？
+.kiro/steering/superpowers-*.md
+.kiro/hooks/*sp-*.kiro.hook
+.kiro/agents/sp-*.md
+.kiro/scripts/sp-*.sh
+.kiro/scripts/sp-*.ps1
 ```
 
-这不是拖慢开发，而是防止 AI 在错误方向上连续堆补丁。
-
-## Agent 使用固定 sleep 修异步问题
-
-v1.3 要求优先使用 condition-based waiting。正确输出应说明等待条件、超时策略和失败诊断。固定 sleep 只能作为最后的辅助措施，不能作为主要方案。
-
-
-## Kiro 说完成但没有 fresh verification evidence
-
-现象：Kiro 说“已完成”或 `COMPLETE`，但没有提供本次验证命令、执行时间、exit code、pass/fail/skip count 或成功判断依据。
-
-处理：这是 v1.4 要阻止的行为。你应该让 Kiro 重新执行 verification，并要求输出 Verification Result Contract。
-
-正确状态：
-
-- 有本次验证证据且通过：`COMPLETE`
-- 验证失败：`NOT COMPLETE` 或 `BLOCKED`
-- 只完成部分内容：`PARTIAL`
-- 无法验证：`UNVERIFIED`
-
-不要接受“之前跑过”“subagent 说通过了”“测试应该没问题”作为完成依据。
+并确认 Kiro Powers 面板已经添加 `<解压目录>/power`。

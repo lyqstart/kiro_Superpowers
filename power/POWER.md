@@ -8,7 +8,7 @@ keywords: [
   "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore", "root-cause-tracing", "defense-in-depth", "condition-based-waiting", "multi-component diagnostics", "architecture stop gate", "根因链路", "多层防护", "条件等待", "多组件诊断", "三次修复失败", "fresh verification evidence", "verification result contract", "completion claim hardening", "exit code", "pass count", "fail count", "skip count", "UNVERIFIED", "PARTIAL", "新鲜验证证据", "验证结果合同", "完成声明硬化", "本次验证"
 ]
 author: "ChatGPT generated adapter"
-version: "1.4.0"
+version: "1.5.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -463,3 +463,60 @@ Skip count：...
 如果命令没有结构化 pass/fail/skip count，必须说明成功判断依据。没有 fresh verification evidence，不允许说 `COMPLETE`；验证失败必须说 `NOT COMPLETE` 或 `BLOCKED`；只完成部分内容必须说 `PARTIAL`；无法验证必须说 `UNVERIFIED` 并说明原因、风险和下一步。
 
 完整规则见 `fresh-verification-evidence.md`。
+
+
+## v1.5 Stable Terminology and Output Contract
+
+v1.5 是稳定版整理，不新增开发流程能力；它统一 v0.9-v1.4 的术语、状态词、agent 输出格式、hook 说明和文档入口。
+
+### Canonical status words
+
+所有完成、验证、审查和 subagent 输出都必须优先使用以下状态词：
+
+```text
+DONE：该 agent 的限定职责已完成，不代表整个 task 完成。
+BLOCKED：被明确阻塞，需要修复、验证或用户决策。
+NEEDS_CONTEXT：缺少 spec/task/文件/验证上下文，必须暂停获取上下文。
+FAILED：执行失败，必须报告失败原因。
+PARTIAL：只完成部分内容，不能声称 COMPLETE。
+UNVERIFIED：无法验证，必须说明原因、风险和下一步。
+COMPLETE：只有在 fresh verification evidence 完整且 gate 通过时才能用于整个 task。
+NOT COMPLETE：验证失败或完成定义未满足。
+```
+
+### Standard status banner
+
+每个开发、修复、继续任务、审查、完成检查场景开始时，输出短状态标识：
+
+```text
+【Kiro规格主控：启用/未启用/待创建】
+【Superpowers执行纪律：启用】
+当前阶段：requirements / design / tasks / implement / debug / review / verify / finalize
+当前流程：feature-spec / bugfix-debugging / task-execution / review / verification / branch-finishing
+当前Task：TASK-xxx / 未绑定 / 待选择
+当前Gate：passed / needs-spec / needs-task / needs-refinement / needs-tdd-evidence / needs-verification / blocked
+```
+
+### Standard agent result
+
+所有 `sp-*` agents 必须保留 `SP Agent Result` 块，并尽量包含：
+
+```text
+SP Agent Result: <agent-name>
+Status: DONE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED
+Task: ...
+Spec: ...
+Changed files: ...
+Verification command: ...
+Verification result: ...
+Risks: ...
+Needs main-agent decision: ...
+Next step: ...
+```
+
+### User burden rule
+
+用户仍然只需要自然语言入口，不需要手动声明 Superpowers Discipline，不需要写长提示词。
+
+
+Reference: `stable-output-contract.md` defines the v1.5 stable output contract.

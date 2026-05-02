@@ -1,50 +1,46 @@
-# 安装说明
+# 安装 Kiro Superpowers Discipline v1.5.0
 
-## 最简单方式
+## 一句话安装
 
-1. 解压压缩包。
-2. 在 Kiro 打开你的项目。
-3. 对 Kiro 说一句：
+在 Kiro 打开目标项目后，对 Kiro 说：
 
 ```text
 请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：<解压目录>
 ```
 
-例如：
+例子：
 
 ```text
-请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v1_4_0
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:	ools\kiro_superpowers_discipline_v1_5_0
 ```
 
-Kiro 应读取 `INSTALL_FOR_KIRO.md`，根据系统运行安装脚本。
+Kiro 应根据系统自动运行安装脚本，将项目级文件复制到当前项目的 `.kiro/` 目录。
 
-## Kiro Power 添加
+## Power 安装
 
-安装脚本只复制 workspace 文件；Power 需要在 Kiro UI 中添加：
+项目级文件安装后，还需要在 Kiro Powers 面板添加 Power：
 
 ```text
 Powers → Add power from Local Path → 选择 <解压目录>/power
 ```
 
-## 手动命令
+## 手动安装
 
 Windows：
 
 ```powershell
-cd <解压目录>
-powershell -ExecutionPolicy Bypass -File .\install\install.ps1 -ProjectRoot "<你的项目根目录>" -Force
+powershell -ExecutionPolicy Bypass -File "<解压目录>\install\install.ps1" -ProjectRoot "<项目根目录>"
 ```
 
 macOS/Linux：
 
 ```bash
-cd <解压目录>
-bash ./install/install.sh "<你的项目根目录>"
+bash "<解压目录>/install/install.sh" "<项目根目录>"
 ```
 
 ## 安装后检查
 
-项目中应该出现：
+项目内应出现：
 
 ```text
 .kiro/steering/superpowers-*.md
@@ -54,25 +50,9 @@ bash ./install/install.sh "<你的项目根目录>"
 .kiro/scripts/sp-*.ps1
 ```
 
-至少包含：
+## 用户体验要求
 
-```text
-.kiro/steering/superpowers-discipline.md
-.kiro/steering/superpowers-status-banner.md
-.kiro/steering/superpowers-router.md
-.kiro/hooks/00-sp-pre-task-gate.kiro.hook
-.kiro/hooks/09-sp-task-completion-contract.kiro.hook
-.kiro/agents/sp-implementer.md
-.kiro/agents/sp-spec-reviewer.md
-.kiro/agents/sp-code-reviewer.md
-.kiro/agents/sp-test-verifier.md
-.kiro/agents/sp-debugger.md
-.kiro/agents/sp-review-feedback-handler.md
-```
-
-## 安装后怎么用
-
-不用写长提示词。直接说：
+安装后用户仍然只需要说：
 
 ```text
 新增数据导出功能
@@ -80,7 +60,3 @@ bash ./install/install.sh "<你的项目根目录>"
 继续当前 spec 的下一个任务
 检查当前任务是否真的完成
 ```
-
-## 卸载
-
-见 `UNINSTALL.md`。
