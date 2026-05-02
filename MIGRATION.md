@@ -1,12 +1,39 @@
+# MIGRATION
+
+## 从 v0.4.0 升级到 v0.5.0
+
+升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。
+
+新增文件：
+
+```text
+power/steering/task-by-task-subagent-loop.md
+power/steering/review-feedback-loop.md
+workspace-assets/.kiro/steering/superpowers-task-by-task-subagent-loop.md
+workspace-assets/.kiro/steering/superpowers-review-feedback-loop.md
+workspace-assets/.kiro/agents/sp-review-feedback-handler.md
+```
+
+保留行为：
+
+- 原安装提示不变。
+- 原卸载方式仍然有效，因为 `.kiro/agents/sp-*.md` 会覆盖新增 agent。
+- v0.4 worktree 自动化和 branch finishing 不变。
+- 不引入 ai_dev_os。
+
+注意：
+
+v0.5 增强的是 subagent 执行顺序和 review feedback 处理，不改变用户日常入口。用户仍然只需要说“新增 xxx / 修复 xxx / 继续当前 spec 的下一个任务”。
+
 # Migration Guide
 
-## v0.3.0 → v0.4.0
+## v0.3.0 → v0.5.0
 
-v0.4.0 是兼容性增强版本，不改变 v0.3.0 的安装、卸载和日常使用方式。
+v0.5.0 是兼容性增强版本，不改变 v0.3.0 的安装、卸载和日常使用方式。
 
 ## 是否需要重新安装
 
-需要。因为 v0.4.0 新增 workspace steering、hooks 和 scripts。
+需要。因为 v0.5.0 新增 workspace steering、hooks 和 scripts。
 
 请按原安装方式重新执行：
 

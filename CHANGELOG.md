@@ -1,6 +1,26 @@
+# CHANGELOG
+
+## v0.5.0
+
+新增：
+
+1. subagent task loop：每个 Kiro task 固定经过 `sp-implementer → sp-test-verifier → sp-spec-reviewer → sp-code-reviewer`。
+2. review feedback loop：feedback 按 `blocker / major / minor / question` 分级处理。
+3. 新增 `sp-review-feedback-handler`，用于审查反馈闭环处理。
+4. 新增 `task-by-task-subagent-loop.md` 与 `review-feedback-loop.md` steering。
+5. 更新 POWER、README、USAGE、能力矩阵和校验脚本。
+
+保持兼容：
+
+- v0.2/v0.3/v0.4 的安装方式不变。
+- 日常自然语言入口不变。
+- v0.4 worktree 和 branch finishing 保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
 # Changelog
 
-## v0.4.0
+## v0.5.0
 
 - 新增 worktree 自动化纪律：实现类任务默认检查 git 状态，避免直接在 main/master 上开发。
 - 新增 branch finishing 纪律：任务验证通过后提供合并、PR、保留、丢弃四个编号选项。
@@ -13,7 +33,7 @@
 - 仍不包含 ai_dev_os。
 
 
-## v0.4.0
+## v0.5.0
 
 - 新增状态标识：任务开始时显示 Kiro 规格主控、Superpowers 执行纪律、当前阶段、当前流程、当前 task、当前 gate。
 - 新增 Superpowers Router：自然语言自动路由到新功能、bugfix、继续任务、审查、验证。
@@ -24,7 +44,7 @@
 - 仍不包含 ai_dev_os。
 
 
-## v0.4.0
+## v0.5.0
 
 - 将日常入口改为自然语言，不再要求用户每次写长提示词。
 - 新增 `INSTALL_FOR_KIRO.md`：用户只需告诉 Kiro 解压目录。

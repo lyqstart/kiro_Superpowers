@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环"
 ]
 author: "ChatGPT generated adapter"
-version: "0.4.0"
+version: "0.5.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -145,6 +145,28 @@ version: "0.4.0"
 - macOS/Linux: `.kiro/scripts/sp-worktree-create.sh`、`.kiro/scripts/sp-finish-branch.sh`
 
 
+## v0.5 Subagent Task Loop and Review Feedback Loop
+
+每个 Kiro task 必须按固定 subagent loop 执行：
+
+1. `sp-implementer`
+2. `sp-test-verifier`
+3. `sp-spec-reviewer`
+4. `sp-code-reviewer`
+
+Kiro main agent 是 controller：必须先读取 `requirements.md`、`design.md`、`tasks.md`，把完整 task context 传给 subagent。不要让 subagent 自己猜 spec 背景。
+
+Gate 规则：
+
+- spec review 不通过，不允许进入 code review。
+- code review 不通过，不允许标记完成。
+- blocker/major 必须修复并重新 review。
+- question 必须暂停提问，不许猜。
+- minor 可以记录为建议，但不能扩大任务范围。
+
+收到 review feedback 后，必须按 `blocker / major / minor / question` 分级处理，并通过 `sp-review-feedback-handler` 形成修复闭环。
+
+
 ## 不可破坏的规则
 
 1. **没有规格，不进入中大型实现。**
@@ -204,6 +226,8 @@ version: "0.4.0"
 - `worktree-discipline.md`
 - `worktree-automation.md`
 - `branch-finishing.md`
+- `task-by-task-subagent-loop.md`
+- `review-feedback-loop.md`
 
 ## 安装请求处理
 

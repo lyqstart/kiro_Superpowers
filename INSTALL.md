@@ -13,7 +13,7 @@
 例如：
 
 ```text
-请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_4_0
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_5_0
 ```
 
 Kiro 会读取本包的 `INSTALL_FOR_KIRO.md`，运行安装脚本。

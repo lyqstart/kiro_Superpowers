@@ -12,7 +12,7 @@ if [ ! -d "$SOURCE" ]; then
   exit 1
 fi
 
-echo "Installing Kiro Superpowers Discipline v0.4.0"
+echo "Installing Kiro Superpowers Discipline v0.5.0"
 echo "Project: $(cd "$PROJECT_ROOT" && pwd)"
 
 mkdir -p "$TARGET/steering" "$TARGET/hooks" "$TARGET/agents" "$TARGET/scripts"

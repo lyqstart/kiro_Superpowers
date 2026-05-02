@@ -1,12 +1,12 @@
-# Kiro Superpowers Discipline v0.4.0
+# Kiro Superpowers Discipline v0.5.0
 
 把 Superpowers 的核心执行纪律改造成 Kiro 可用的 Power / Steering / Hooks / Custom Subagents。
 
-v0.4.0 保持 v0.3.0 的安装、卸载和日常使用方式不变，只新增：
+v0.5.0 保持 v0.4.0 的安装、卸载和日常使用方式不变，只新增：
 
-1. **worktree 自动化**：实现类任务默认检查 git 状态，避免直接在 main/master 上开发，优先创建隔离 worktree。
-2. **branch finishing**：实现任务验证通过后，提供合并、PR、保留、丢弃四个编号选项；不自动合并或丢弃。
-3. **安全脚本**：新增 Windows PowerShell 和 macOS/Linux shell 脚本，用于创建 worktree 和分支收尾。
+1. **subagent task loop**：每个 Kiro task 按 `sp-implementer → sp-test-verifier → sp-spec-reviewer → sp-code-reviewer` 固定顺序执行。
+2. **review feedback loop**：审查反馈按 `blocker / major / minor / question` 分级处理，blocker/major 必须修复并重新 review。
+3. **sp-review-feedback-handler**：新增审查反馈处理 subagent，防止盲目接受 reviewer 建议或跳过问题。
 
 ## 用户日常不需要写长提示词
 
@@ -60,6 +60,27 @@ Bug → Bugfix Spec → 复现 → 根因 → worktree gate → 失败测试/替
 
 丢弃必须二次确认。
 
+
+## v0.5 Subagent Task Loop 行为
+
+实现类 Kiro task 不直接由一个 agent 从头做到尾，而是固定经过：
+
+1. `sp-implementer` 实现一个明确 task。
+2. `sp-test-verifier` 检查新鲜验证证据。
+3. `sp-spec-reviewer` 检查是否符合 requirements/design/task。
+4. `sp-code-reviewer` 检查代码质量。
+
+Kiro main agent 必须先读取 `requirements.md`、`design.md`、`tasks.md`，把完整 task 上下文传给 subagent。不允许 subagent 自己猜 spec 背景。
+
+## v0.5 Review Feedback 行为
+
+Review feedback 必须分级：
+
+- `blocker`：阻止完成，必须修复。
+- `major`：重要问题，必须修复后重新 review。
+- `minor`：建议，可以记录，不影响核心完成判断。
+- `question`：信息不足，必须暂停提问，不许猜。
+
 ## 定位
 
 - Kiro 是主控软件。
@@ -110,7 +131,7 @@ MIGRATION.md
 例如：
 
 ```text
-请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_4_0
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_5_0
 ```
 
 Kiro 应该读取 `INSTALL_FOR_KIRO.md`，运行对应脚本，并提示你把 `power/` 目录添加到 Kiro Powers。

@@ -43,6 +43,11 @@ required = [
     'workspace-assets/.kiro/agents/sp-code-reviewer.md',
     'workspace-assets/.kiro/agents/sp-test-verifier.md',
     'workspace-assets/.kiro/agents/sp-debugger.md',
+    'power/steering/task-by-task-subagent-loop.md',
+    'power/steering/review-feedback-loop.md',
+    'workspace-assets/.kiro/steering/superpowers-task-by-task-subagent-loop.md',
+    'workspace-assets/.kiro/steering/superpowers-review-feedback-loop.md',
+    'workspace-assets/.kiro/agents/sp-review-feedback-handler.md',
     'install/install.ps1',
     'install/install.sh',
 ]
@@ -75,7 +80,7 @@ for p in (root / 'workspace-assets/.kiro/agents').glob('sp-*.md'):
 
 # Power metadata checks.
 power = (root / 'power/POWER.md').read_text(encoding='utf-8')
-for token in ['version: "0.4.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md', 'branch-finishing.md']:
+for token in ['version: "0.5.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md', 'branch-finishing.md', 'task-by-task-subagent-loop.md', 'review-feedback-loop.md']:
     if token not in power:
         errors.append(f'POWER.md missing token: {token}')
 
@@ -91,6 +96,11 @@ for token in [
     '继续当前 spec 的下一个任务',
     '合并回主分支',
     '丢弃本次工作',
+    'sp-review-feedback-handler',
+    'blocker',
+    'major',
+    'minor',
+    'question',
 ]:
     if token not in readme and token not in usage and token not in install:
         errors.append(f'Compatibility token missing: {token}')
@@ -103,7 +113,7 @@ for p in root.rglob('*'):
 
 # Capability matrix must mention core statuses.
 matrix = (root / 'SUPERPOWERS_CAPABILITY_MATRIX.md').read_text(encoding='utf-8')
-for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch', 'Worktree 自动化', 'Branch finishing']:
+for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch', 'Worktree 自动化', 'Branch finishing', 'Review feedback loop', 'Subagent task loop']:
     if token not in matrix:
         errors.append(f'Matrix missing capability: {token}')
 
@@ -117,7 +127,8 @@ print('- Package structure: PASS')
 print('- Power structure: PASS')
 print('- Hook JSON: PASS')
 print('- Agent frontmatter: PASS')
-print('- v0.2/v0.3 user entrypoints: PASS')
+print('- v0.2/v0.3/v0.4 user entrypoints: PASS')
 print('- ai_dev_os absent: PASS')
 print('- CHANGELOG/MIGRATION/capability matrix: PASS')
 print('- v0.4 worktree/branch finishing files: PASS')
+print('- v0.5 subagent loop/review feedback files: PASS')

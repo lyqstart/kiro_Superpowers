@@ -123,7 +123,43 @@ Kiro 应该自动做：
 给出：完成 / 未完成 / 阻塞
 ```
 
-## 5. 分支收尾
+
+## 5. v0.5 subagent task loop
+
+实现类 task 应自动进入固定 loop：
+
+```text
+Kiro main agent 读取 requirements/design/tasks
+  ↓
+整理完整 task context
+  ↓
+sp-implementer
+  ↓
+sp-test-verifier
+  ↓
+sp-spec-reviewer
+  ↓
+sp-code-reviewer
+  ↓
+通过后才允许标记 task 完成
+```
+
+如果 spec review 不通过，不能进入 code review。如果 code review 有 blocker/major，不能标记完成。
+
+## 6. v0.5 review feedback loop
+
+审查反馈必须分级：
+
+```text
+blocker：必须修复
+major：必须修复并重新 review
+minor：记录建议，不影响核心完成判断
+question：暂停提问，不许猜
+```
+
+Kiro 可以调用 `sp-review-feedback-handler` 处理反馈，但用户不需要手动点名。
+
+## 7. 分支收尾
 
 任务通过验证后，Kiro 不应该自动合并，而应该给出：
 

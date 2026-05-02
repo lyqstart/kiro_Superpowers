@@ -93,3 +93,19 @@ inclusion: always
 改动：...
 风险：...
 ```
+
+
+## v0.5 Subagent task loop
+
+实现类 Kiro task 必须按固定顺序执行：
+
+1. `sp-implementer`
+2. `sp-test-verifier`
+3. `sp-spec-reviewer`
+4. `sp-code-reviewer`
+
+Kiro main agent 必须先读取 requirements.md、design.md、tasks.md，并把完整 task context 传给 subagent。spec review 不通过，不进入 code review；code review 不通过，不允许标记完成。
+
+## v0.5 Review feedback loop
+
+Review feedback 必须分级为 `blocker / major / minor / question`。blocker/major 必须修复并重新 review；question 必须暂停提问，不许猜；minor 只能作为建议记录，不扩大任务范围。

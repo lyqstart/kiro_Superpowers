@@ -41,3 +41,15 @@ sp-spec-reviewer 确认不变行为未破坏
 - 子 agent 只拿自己需要的上下文。
 - 不把整段无关聊天历史交给子 agent。
 - 子 agent 报告阻塞时，主 agent 不能强行重试，必须补上下文、换模型、拆任务或询问用户。
+
+
+## v0.5 固定 task loop
+
+实现类 Kiro task 必须进入固定 loop：
+
+1. `sp-implementer`
+2. `sp-test-verifier`
+3. `sp-spec-reviewer`
+4. `sp-code-reviewer`
+
+main agent 必须先读取 requirements/design/tasks 并提供完整 task context。spec review 不通过，不进入 code review；code review 不通过，不标记完成。
