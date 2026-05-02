@@ -25,7 +25,7 @@
 新增数据导出功能
 ```
 
-Kiro 应自动：显示状态标识 → 创建/更新 Feature Spec → requirements/design/tasks → worktree gate → TDD → subagent task loop → task completion contract → branch finishing。
+Kiro 应自动：显示状态标识 → 创建/更新 Feature Spec → requirements/design/tasks → worktree gate → TDD Evidence Contract → subagent task loop → task completion contract → branch finishing。
 
 ## 修 bug
 
@@ -35,7 +35,7 @@ Kiro 应自动：显示状态标识 → 创建/更新 Feature Spec → requireme
 修复登录接口偶发 500 的问题
 ```
 
-Kiro 应自动：显示状态标识 → 判断为 bugfix → 先复现 → 查根因 → 失败测试/替代验证 → 最小修复 → review → task completion contract。
+Kiro 应自动：显示状态标识 → 判断为 bugfix → 先复现 → 查根因 → RED 失败测试/替代验证 → GREEN 最小修复 → review → task completion contract。
 
 ## 继续任务
 
@@ -136,5 +136,29 @@ question：暂停提问，不许猜
 
 选择 4 时必须二次确认。
 
+
+> 稳定规则：不要求用户写长提示词。
+
+
+## TDD Evidence Contract
+
+新功能、行为变更、bugfix 默认需要 TDD 证据。用户不用手动声明。
+
+完成前应看到：
+
+```text
+TDD Evidence：完整 / 不适用 / 例外待确认 / 缺失
+RED 验证命令：...
+RED 输出结果：...
+失败原因：...
+失败测试文件路径：...
+GREEN 验证命令：...
+GREEN 输出结果：...
+通过测试文件路径：...
+对应实现文件路径：...
+REFACTOR：有/无 + 原因 + 验证结果
+```
+
+没有 RED 失败证据和 GREEN 通过证据，不能把新功能、行为变更或 bugfix 标记为 COMPLETE。无法 TDD 时必须说明原因、给出替代验证方案，并等待用户确认。
 
 > 稳定规则：不要求用户写长提示词。

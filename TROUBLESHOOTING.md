@@ -84,3 +84,22 @@ python scripts/validate_package.py
 ```
 
 应看到 `Compatibility validation passed`。
+
+
+## TDD evidence 缺失
+
+现象：Kiro 想标记 COMPLETE，但没有 RED/GREEN/REFACTOR 证据。
+
+处理：要求 Kiro 补充：
+
+```text
+RED 验证命令和输出
+失败原因
+失败测试文件路径
+GREEN 验证命令和输出
+通过测试文件路径
+对应实现文件路径
+REFACTOR 记录或无需重构原因
+```
+
+如果任务确实无法 TDD，Kiro 必须说明例外原因、替代验证方案，并等待用户确认。

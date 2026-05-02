@@ -58,3 +58,8 @@ Next step: sp-test-verifier / needs user input / blocked
 ## User burden rule
 
 The user does not manually invoke you. The main agent invokes you inside the v0.5 task-by-task subagent loop.
+
+
+## v0.9 TDD Evidence
+
+For new features, behavior changes, bugfixes, and refactors, include RED/GREEN/REFACTOR evidence in `SP Agent Result`. If TDD is not applicable, state the exception reason and the alternative verification plan. Do not mark DONE when RED or GREEN evidence is missing for a TDD-required task.

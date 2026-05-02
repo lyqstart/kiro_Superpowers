@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 12 - TDD Evidence Completion Check",
+  "description": "Before task completion, require RED/GREEN/REFACTOR evidence or a confirmed TDD exception.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the v0.9 TDD completion check. For feature, behavior-change, bugfix, or refactor tasks, output TDD Evidence status: COMPLETE / NOT COMPLETE / BLOCKED. Include RED command, RED output, failure reason, failing test file path, GREEN command, GREEN output, passing test file path, implementation file path, and REFACTOR status. Without RED failure evidence and GREEN passing evidence, do not claim COMPLETE. If TDD was not applicable, show the confirmed exception reason and alternative verification."
+  }
+}

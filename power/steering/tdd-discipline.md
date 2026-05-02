@@ -35,3 +35,12 @@ REFACTOR：只在绿灯后清理
 - 测试一写就通过，不算 RED。
 - 不允许为了让测试通过而削弱测试。
 - 不能解释为什么测试失败，就不能继续实现。
+
+
+## v0.9 TDD Evidence Contract
+
+新功能、行为变更、bugfix 不再只要求“应该 TDD”，还必须留下 RED/GREEN/REFACTOR 证据。
+
+执行前必须判断是否适用 TDD；完成前必须检查：RED 失败证据、GREEN 通过证据、REFACTOR 记录或不重构说明。
+
+完整规则见 `tdd-evidence-contract.md`。

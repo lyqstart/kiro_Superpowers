@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 13 - TDD Verification Review",
+  "description": "During verification, check that RED/GREEN/REFACTOR evidence is fresh, specific, and not replaced by assertions.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review v0.9 TDD evidence during verification. Confirm RED/GREEN/REFACTOR evidence is specific to this task, includes commands and output summaries, and is not replaced by 'previously ran' or subagent assertions. If evidence is missing, stale, or unrelated, mark NOT COMPLETE and list the exact command/evidence still required. Do not advance to the next task while TDD evidence is incomplete."
+  }
+}

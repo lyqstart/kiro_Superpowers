@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据"
 ]
 author: "ChatGPT generated adapter"
-version: "0.8.0"
+version: "0.9.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -316,3 +316,33 @@ This version is a stabilization release. Keep the user experience simple:
 
 
 > 稳定规则：不要求用户写长提示词。
+
+
+## v0.9 TDD Evidence Contract
+
+新功能、行为变更、bugfix 默认必须提供 TDD evidence。不要让用户手动要求 TDD；这是系统责任。
+
+完成前必须输出：
+
+```text
+TDD Evidence：完整 / 不适用 / 例外待确认 / 缺失
+RED 验证命令：...
+RED 输出结果：...
+失败原因：...
+失败测试文件路径：...
+GREEN 验证命令：...
+GREEN 输出结果：...
+通过测试文件路径：...
+对应实现文件路径：...
+REFACTOR：有/无 + 原因 + 验证结果
+```
+
+硬规则：
+
+- 没有 RED 失败证据，不允许声称 COMPLETE。
+- 没有 GREEN 通过证据，不允许声称 COMPLETE。
+- 测试失败不能进入下一个 task。
+- 不能用“之前跑过”代替本次验证。
+- 无法 TDD 时必须说明原因、给出替代验证方案，并等待用户确认。
+
+完整规则见 `tdd-evidence-contract.md`。

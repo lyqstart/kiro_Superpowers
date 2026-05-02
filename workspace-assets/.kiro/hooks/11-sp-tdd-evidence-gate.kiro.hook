@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 11 - TDD Evidence Gate",
+  "description": "Before a task starts, determine whether TDD evidence is required and require RED evidence planning for behavior-changing work.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the v0.9 TDD Evidence Contract before starting this task. Determine whether this is a new feature, behavior change, bugfix, refactor, or non-behavioral task. If TDD applies, identify the intended RED test, failure reason, and test file path before implementation. Do not start production code before RED evidence. If TDD cannot apply, explain why, propose an alternative verification plan, and wait for user confirmation before continuing."
+  }
+}

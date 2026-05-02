@@ -23,6 +23,8 @@ required = [
     'power/steering/kiro-task-execution-contract.md',
     'power/steering/executing-plans-discipline.md',
     'power/steering/task-completion-contract.md',
+    'power/steering/tdd-discipline.md',
+    'power/steering/tdd-evidence-contract.md',
     'workspace-assets/.kiro/steering/superpowers-discipline.md',
     'workspace-assets/.kiro/steering/superpowers-status-banner.md',
     'workspace-assets/.kiro/steering/superpowers-router.md',
@@ -34,6 +36,7 @@ required = [
     'workspace-assets/.kiro/steering/superpowers-kiro-task-execution-contract.md',
     'workspace-assets/.kiro/steering/superpowers-executing-plans-discipline.md',
     'workspace-assets/.kiro/steering/superpowers-task-completion-contract.md',
+    'workspace-assets/.kiro/steering/superpowers-tdd-evidence-contract.md',
     'workspace-assets/.kiro/hooks/00-sp-pre-task-gate.kiro.hook',
     'workspace-assets/.kiro/hooks/01-sp-post-task-verification.kiro.hook',
     'workspace-assets/.kiro/hooks/02-sp-agent-stop-sanity-check.kiro.hook',
@@ -45,6 +48,9 @@ required = [
     'workspace-assets/.kiro/hooks/08-sp-task-execution-contract.kiro.hook',
     'workspace-assets/.kiro/hooks/09-sp-task-completion-contract.kiro.hook',
     'workspace-assets/.kiro/hooks/10-sp-post-task-branch-finishing-check.kiro.hook',
+    'workspace-assets/.kiro/hooks/11-sp-tdd-evidence-gate.kiro.hook',
+    'workspace-assets/.kiro/hooks/12-sp-tdd-evidence-completion.kiro.hook',
+    'workspace-assets/.kiro/hooks/13-sp-tdd-verification-review.kiro.hook',
     'workspace-assets/.kiro/agents/sp-implementer.md',
     'workspace-assets/.kiro/agents/sp-spec-reviewer.md',
     'workspace-assets/.kiro/agents/sp-code-reviewer.md',
@@ -69,7 +75,7 @@ for rel in required:
 
 # Hook JSON must parse and follow the stable naming shape.
 hook_dir = root / 'workspace-assets/.kiro/hooks'
-expected_hook_count = 11
+expected_hook_count = 14
 hooks = sorted(hook_dir.glob('*.kiro.hook')) if hook_dir.exists() else []
 if len(hooks) != expected_hook_count:
     errors.append(f'Expected {expected_hook_count} hooks, found {len(hooks)}')
@@ -128,10 +134,10 @@ if missing_agents:
 # Power metadata and steering consistency checks.
 power = (root / 'power/POWER.md').read_text(encoding='utf-8') if (root / 'power/POWER.md').exists() else ''
 for token in [
-    'version: "0.8.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md',
+    'version: "0.9.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md',
     'branch-finishing.md', 'task-by-task-subagent-loop.md', 'review-feedback-loop.md',
     'parallel-agent-policy.md', 'kiro-task-execution-contract.md', 'executing-plans-discipline.md',
-    'task-completion-contract.md', 'v0.8 Stability and Documentation Rules'
+    'task-completion-contract.md', 'tdd-evidence-contract.md', 'v0.8 Stability and Documentation Rules', 'v0.9 TDD Evidence Contract'
 ]:
     if token not in power:
         errors.append(f'POWER.md missing token: {token}')
@@ -149,7 +155,7 @@ for token in [
     '不要求用户写长提示词', 'Powers → Add power from Local Path',
     '.kiro/steering/superpowers-*.md', '.kiro/hooks/*sp-*.kiro.hook', '.kiro/agents/sp-*.md',
     '合并回主分支', '丢弃本次工作', 'Parallel Dispatch Plan',
-    'task execution contract', 'task completion contract', 'COMPLETE / NOT COMPLETE / BLOCKED'
+    'task execution contract', 'task completion contract', 'COMPLETE / NOT COMPLETE / BLOCKED', 'TDD Evidence', 'RED 验证命令', 'GREEN 验证命令'
 ]:
     if token not in combined:
         errors.append(f'Compatibility/user-experience token missing: {token}')
@@ -162,16 +168,17 @@ for token in [
     'requesting-code-review', 'receiving-code-review', 'subagent-driven-development',
     'dispatching-parallel-agents', 'using-git-worktrees', 'finishing-a-development-branch',
     'writing-skills', 'v0.8.0 稳定化整理', 'SP Agent Result',
-    'Parallel Dispatch Plan', 'kiro-task-execution-contract.md', 'task-completion-contract.md'
+    'Parallel Dispatch Plan', 'kiro-task-execution-contract.md', 'task-completion-contract.md',
+    'tdd-evidence-contract.md', 'v0.9.0 TDD Evidence Contract', 'RED/GREEN/REFACTOR'
 ]:
     if token not in matrix:
         errors.append(f'Matrix missing capability/token: {token}')
 
 # Version docs must mention v0.8.0 and upgrade path.
 for rel, tokens in {
-    'CHANGELOG.md': ['v0.8.0', '稳定化整理', '验证增强'],
-    'MIGRATION.md': ['从 v0.7.0 升级到 v0.8.0', 'v0.8.0 是稳定化整理版', '原安装提示不变'],
-    'README.md': ['Kiro Superpowers Discipline v0.8.0', 'v0.8.0 是稳定化整理版'],
+    'CHANGELOG.md': ['v0.9.0', 'TDD Evidence Contract', 'RED/GREEN/REFACTOR'],
+    'MIGRATION.md': ['从 v0.8.0 升级到 v0.9.0', 'v0.9.0 只增强 TDD 证据要求', '原安装提示不变'],
+    'README.md': ['Kiro Superpowers Discipline v0.9.0', 'v0.9.0 是 TDD Evidence Contract 版本'],
 }.items():
     text = (root / rel).read_text(encoding='utf-8') if (root / rel).exists() else ''
     for token in tokens:
@@ -199,7 +206,7 @@ for rel in ['README.md', 'INSTALL.md', 'INSTALL_FOR_KIRO.md', 'USAGE.md', 'MIGRA
     p = root / rel
     if p.exists():
         text = p.read_text(encoding='utf-8')
-        if 'kiro_superpowers_discipline_v0_7_0' in text:
+        if 'kiro_superpowers_discipline_v0_8_0' in text:
             errors.append(f'Stale package path in {rel}')
 
 if errors:
@@ -222,3 +229,4 @@ print('- v0.5 subagent loop/review feedback files: PASS')
 print('- v0.6 parallel agents safety files: PASS')
 print('- v0.7 task execution/completion contract files: PASS')
 print('- v0.8 stabilization checks: PASS')
+print('- v0.9 TDD evidence contract files: PASS')

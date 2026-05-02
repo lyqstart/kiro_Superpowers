@@ -34,3 +34,8 @@ Evidence: ...
 Missing evidence: ...
 Next step: sp-spec-reviewer / fix verification first / blocked
 ```
+
+
+## v0.9 TDD Evidence
+
+For new features, behavior changes, bugfixes, and refactors, include RED/GREEN/REFACTOR evidence in `SP Agent Result`. If TDD is not applicable, state the exception reason and the alternative verification plan. Do not mark DONE when RED or GREEN evidence is missing for a TDD-required task.

@@ -1,5 +1,28 @@
 # CHANGELOG
 
+## v0.9.0
+
+新增：
+
+1. TDD Evidence Contract：新功能、行为变更、bugfix 默认必须提供 RED/GREEN/REFACTOR 证据。
+2. TDD 例外处理：无法 TDD 时必须说明原因、给出替代验证方案，并等待用户确认。
+3. TDD 完成检查：没有 RED 失败证据和 GREEN 通过证据，不允许声称 COMPLETE；测试失败不能进入下一个 task。
+4. 增强 hooks：新增 `11-sp-tdd-evidence-gate.kiro.hook`、`12-sp-tdd-evidence-completion.kiro.hook`、`13-sp-tdd-verification-review.kiro.hook`。
+5. 新增 steering：`tdd-evidence-contract.md` 和 `superpowers-tdd-evidence-contract.md`。
+
+保持兼容：
+
+- v0.2-v0.8 的安装方式不变。
+- v0.2-v0.8 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4 worktree 和 branch finishing 保持不变。
+- v0.5 subagent task loop 和 review feedback loop 保持不变。
+- v0.6 parallel agents 安全策略保持不变。
+- v0.7 task execution/completion contract 保持不变。
+- v0.8 稳定化文档和校验保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
 ## v0.8.0
 
 新增/整理：
