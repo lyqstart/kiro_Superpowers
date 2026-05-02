@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Task Execution Contract",
+  "description": "Before executing a Kiro task, require critical task reading, requirement/design linkage, scope boundaries, and a verification plan.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the v0.7 Kiro task execution contract before starting this task. Critically read the current task and its requirements/design/tasks context. Confirm goal, scope, non-goals, completion definition, requirement/design linkage, expected changed files, and verification command. If the task is ambiguous, too large, missing requirement/design linkage, or asks for scope-out work, stop and ask the smallest necessary question with numbered options. Do not guess. Do not start code edits until the contract is satisfied."
+  }
+}

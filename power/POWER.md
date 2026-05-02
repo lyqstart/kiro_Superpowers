@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed"
 ]
 author: "ChatGPT generated adapter"
-version: "0.6.0"
+version: "0.7.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -184,6 +184,39 @@ Gate 规则：
 如果边界不清晰，必须禁止并行。并行结束后，Kiro main agent 必须汇总结果、检查冲突，并统一进入 spec review / code review / test verification。
 
 
+
+## v0.7 Kiro Task Execution Contract and Completion Contract
+
+执行每个 Kiro task 前，必须批判性阅读当前 task，而不是直接照做。
+
+Task execution contract：
+
+- 当前 task 必须有明确目标、范围、不做范围、完成定义。
+- 当前 task 必须关联 requirement/design/task。
+- task 有歧义时必须暂停提问，不许猜。
+- task 缺少 requirement/design 关联时必须暂停。
+- task 太大时必须建议拆分。
+- task 范围外内容不允许顺手做。
+
+Executing-plans discipline：
+
+- 每个 task 执行前确认目标、范围、不做、完成定义、验证命令。
+- 执行中遇到 blocker 必须停止。
+- 测试失败不能继续下一个 task。
+- verification 失败不能标记完成。
+- 所有相关 task 完成并验证通过后进入 branch finishing。
+
+Task completion contract：
+
+完成前必须有：验证命令、验证结果、改动文件、满足的 requirement/design/task、剩余风险。
+
+状态只能是：
+
+- COMPLETE：验证通过、spec review 通过、code review 无 blocker/major。
+- NOT COMPLETE：测试/构建/lint/verification/review 未通过。
+- BLOCKED：缺少上下文、需要用户确认、环境受限或 git 状态不安全。
+
+
 ## 不可破坏的规则
 
 1. **没有规格，不进入中大型实现。**
@@ -264,3 +297,9 @@ Gate 规则：
 5. 最后只给 3 个使用例子，不输出长流程。
 
 本版本不创建 `ai_dev_os`。
+
+<!-- v0.7 steering: kiro-task-execution-contract.md -->
+
+<!-- v0.7 steering: executing-plans-discipline.md -->
+
+<!-- v0.7 steering: task-completion-contract.md -->

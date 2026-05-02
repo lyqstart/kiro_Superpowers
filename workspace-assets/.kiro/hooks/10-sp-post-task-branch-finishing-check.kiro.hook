@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Post Task Branch Finishing Check",
+  "description": "After all task completion conditions pass, require branch finishing options for code-changing work.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If the v0.7 task completion contract is COMPLETE and this was code-changing work, check whether branch finishing is required. If all relevant tasks for the current branch are done and verification passed, present exactly four numbered options: 1. 合并回主分支 2. 推送并创建 PR 3. 保留分支 4. 丢弃本次工作. Do not merge automatically. Discard requires second explicit confirmation. If task completion is NOT COMPLETE or BLOCKED, do not offer merge as ready."
+  }
+}

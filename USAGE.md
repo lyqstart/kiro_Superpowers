@@ -32,13 +32,15 @@ Kiro 应该自动做：
   ↓
 生成 requirements/design/tasks
   ↓
-判断是否是实现类任务
+执行 task execution contract
   ↓
 需要时进入 worktree gate
   ↓
 按 TDD 执行任务
   ↓
-完成前验证和审查
+subagent task loop
+  ↓
+task completion contract
   ↓
 通过后进入 branch finishing 四选项
 ```
@@ -62,13 +64,15 @@ Kiro 应该自动做：
   ↓
 查根因
   ↓
+执行 task execution contract
+  ↓
 需要时创建隔离 worktree
   ↓
 写失败测试或替代复现验证
   ↓
 最小修复
   ↓
-验证 bug 修复和回归行为
+task completion contract
   ↓
 通过后进入 branch finishing 四选项
 ```
@@ -90,11 +94,13 @@ Kiro 应该自动做：
   ↓
 读取 requirements/design/tasks
   ↓
-执行 pre-task gate
+执行 task execution contract
   ↓
 如果是实现类任务，执行 worktree gate
   ↓
 执行、验证、审查
+  ↓
+执行 task completion contract
   ↓
 通过后标记完成并进入 branch finishing
 ```
@@ -120,11 +126,41 @@ Kiro 应该自动做：
   ↓
 检查代码质量
   ↓
-给出：完成 / 未完成 / 阻塞
+输出 COMPLETE / NOT COMPLETE / BLOCKED
 ```
 
+## 5. v0.7 task execution contract
 
-## 5. v0.5 subagent task loop
+执行前必须确认：
+
+```text
+目标：...
+范围：...
+不做：...
+完成定义：...
+requirement/design/task：...
+验证命令：...
+```
+
+如果 task 有歧义、缺少 requirement/design 关联、太大、或包含范围外内容，必须暂停，不许猜。
+
+## 6. v0.7 task completion contract
+
+完成前必须输出：
+
+```text
+状态：COMPLETE / NOT COMPLETE / BLOCKED
+验证命令：...
+验证结果：...
+改动文件：...
+满足的 requirement/design/task：...
+剩余风险：...
+下一步：...
+```
+
+不能用“已经完成”代替验证证据。
+
+## 7. v0.5 subagent task loop
 
 实现类 task 应自动进入固定 loop：
 
@@ -146,7 +182,7 @@ sp-code-reviewer
 
 如果 spec review 不通过，不能进入 code review。如果 code review 有 blocker/major，不能标记完成。
 
-## 6. v0.5 review feedback loop
+## 8. v0.5 review feedback loop
 
 审查反馈必须分级：
 
@@ -159,7 +195,7 @@ question：暂停提问，不许猜
 
 Kiro 可以调用 `sp-review-feedback-handler` 处理反馈，但用户不需要手动点名。
 
-## 7. v0.6 parallel agents 安全并行
+## 9. v0.6 parallel agents 安全并行
 
 用户不需要主动要求并行。Kiro 判断多个任务可能并行时，必须先输出：
 
@@ -167,30 +203,9 @@ Kiro 可以调用 `sp-review-feedback-handler` 处理反馈，但用户不需要
 Parallel Dispatch Plan
 ```
 
-计划必须说明：
+默认允许并行 context gathering / review，不默认并行 implementation。如果任务边界不清晰，禁止并行。并行结束后，必须统一进入 spec review / code review / test verification。
 
-```text
-每个任务的目标
-每个任务涉及文件
-每个任务风险
-每个任务使用哪个 agent
-是否存在共享文件、共享接口、共享数据库表、共享迁移脚本、共享状态机
-最终结论：允许并行 / 禁止并行
-```
-
-默认允许并行 context gathering / review，不默认并行 implementation。如果任务边界不清晰，禁止并行。
-
-并行结束后，Kiro main agent 必须：
-
-```text
-汇总每个 agent 的结果
-检查冲突
-统一进入 spec review
-统一进入 code review
-统一进入 test verification
-```
-
-## 8. 分支收尾
+## 10. 分支收尾
 
 任务通过验证后，Kiro 不应该自动合并，而应该给出：
 

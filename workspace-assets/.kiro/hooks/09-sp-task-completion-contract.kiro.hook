@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Task Completion Contract",
+  "description": "Before accepting task completion, require verification command, result, changed files, requirement/design/task mapping, and remaining risks.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the v0.7 task completion contract. Do not claim COMPLETE by assertion. Output status COMPLETE / NOT COMPLETE / BLOCKED. Include verification command, verification result, changed files, satisfied requirement/design/task, unresolved risks, and next step. COMPLETE is allowed only if verification passed, spec review passed, code review has no blocker/major, and no scope-out changes remain unconfirmed. If verification failed or is missing, mark NOT COMPLETE or BLOCKED."
+  }
+}
