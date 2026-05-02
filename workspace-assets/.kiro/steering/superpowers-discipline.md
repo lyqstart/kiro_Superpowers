@@ -39,6 +39,30 @@ inclusion: always
 
 这些是系统责任。
 
+
+## v0.3 状态标识
+
+每次处理开发、修复、继续任务、审查、验证请求时，先显示：
+
+```text
+【Kiro规格主控：启用/未启用/待创建】
+【Superpowers执行纪律：启用】
+当前阶段：requirements / design / tasks / implement / debug / review / verify / finalize
+当前流程：feature-spec / bugfix-debugging / task-execution / review / verification
+当前Task：TASK-xxx / 未绑定 / 待选择
+当前Gate：passed / needs-spec / needs-task / needs-verification / blocked
+```
+
+状态标识之后只给一句最小下一步。
+
+## v0.3 Router
+
+- 新功能：进入 Feature Spec，走 requirements/design/tasks + TDD。
+- bugfix：进入 systematic debugging，先复现、查根因、失败测试或替代验证。
+- 继续任务：定位当前 spec 和下一个未完成 task，执行前通过 gate。
+- 审查：先 spec review，再 code review，再 test review。
+- 完成/验收：必须运行或确认新鲜验证证据，输出 COMPLETE / NOT COMPLETE / BLOCKED。
+
 ## 强制纪律
 
 1. 没有规格，不进入中大型实现。

@@ -8,7 +8,7 @@ keywords: [
   "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查"
 ]
 author: "ChatGPT generated adapter"
-version: "0.2.0"
+version: "0.3.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -92,6 +92,34 @@ version: "0.2.0"
 4. 做 code quality review。
 5. 输出：完成 / 未完成 / 阻塞。
 
+
+## v0.3 状态标识
+
+每次开始处理开发、修复、继续任务、审查、验证类请求时，先输出状态标识：
+
+```text
+【Kiro规格主控：启用/未启用/待创建】
+【Superpowers执行纪律：启用】
+当前阶段：requirements / design / tasks / implement / debug / review / verify / finalize
+当前流程：feature-spec / bugfix-debugging / task-execution / review / verification
+当前Task：TASK-xxx / 未绑定 / 待选择
+当前Gate：passed / needs-spec / needs-task / needs-verification / blocked
+```
+
+状态标识必须短。不要让用户手动声明是否使用 Kiro Spec 或 Superpowers Discipline。
+
+## v0.3 Superpowers Router
+
+用户自然语言自动路由：
+
+- 新功能 → requirements/design/tasks + TDD。
+- bugfix → systematic debugging。
+- 继续任务 → task execution。
+- 审查 → spec/code/test review。
+- 完成任务 → verification。
+
+如果意图不清，只问一个最小必要问题，优先给编号选项。
+
 ## 不可破坏的规则
 
 1. **没有规格，不进入中大型实现。**
@@ -138,6 +166,8 @@ version: "0.2.0"
 
 - `workflow-map.md`
 - `auto-routing.md`
+- `status-banner.md`
+- `superpowers-router.md`
 - `requirements-gate.md`
 - `design-gate.md`
 - `task-execution-discipline.md`

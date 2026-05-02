@@ -49,6 +49,8 @@ bash "<解压目录>/install/install.sh" "."
 
 ```text
 .kiro/steering/superpowers-discipline.md
+.kiro/steering/superpowers-status-banner.md
+.kiro/steering/superpowers-router.md
 .kiro/hooks/00-sp-pre-task-gate.kiro.hook
 .kiro/hooks/01-sp-post-task-verification.kiro.hook
 .kiro/agents/sp-implementer.md
@@ -77,3 +79,5 @@ workspace 文件已安装。现在在 Kiro 的 Powers 面板选择 Add power fro
 修复登录失败的问题
 继续当前 spec 的下一个任务
 ```
+
+提醒用户：v0.3.0 开始，任务开头应该显示 Kiro / Superpowers 状态标识。

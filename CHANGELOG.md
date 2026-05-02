@@ -1,6 +1,17 @@
 # Changelog
 
-## v0.2.0
+## v0.3.0
+
+- 新增状态标识：任务开始时显示 Kiro 规格主控、Superpowers 执行纪律、当前阶段、当前流程、当前 task、当前 gate。
+- 新增 Superpowers Router：自然语言自动路由到新功能、bugfix、继续任务、审查、验证。
+- 新增 `SUPERPOWERS_CAPABILITY_MATRIX.md`：记录原 Superpowers 能力在 Kiro 版中的覆盖情况、未覆盖情况、后续计划。
+- 新增 workspace steering：`superpowers-status-banner.md` 和 `superpowers-router.md`。
+- 更新 `POWER.md`、`README.md`、`USAGE.md`、`INSTALL.md`、`INSTALL_FOR_KIRO.md`。
+- 保持 v0.2.0 的安装、卸载、日常使用方式不变。
+- 仍不包含 ai_dev_os。
+
+
+## v0.3.0
 
 - 将日常入口改为自然语言，不再要求用户每次写长提示词。
 - 新增 `INSTALL_FOR_KIRO.md`：用户只需告诉 Kiro 解压目录。

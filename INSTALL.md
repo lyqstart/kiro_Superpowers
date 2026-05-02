@@ -13,7 +13,7 @@
 例如：
 
 ```text
-请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_2_0
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_3_0
 ```
 
 Kiro 会读取本包的 `INSTALL_FOR_KIRO.md`，运行安装脚本。
@@ -48,6 +48,8 @@ bash ./install/install.sh "<你的项目根目录>"
 
 ```text
 .kiro/steering/superpowers-discipline.md
+.kiro/steering/superpowers-status-banner.md
+.kiro/steering/superpowers-router.md
 .kiro/hooks/*.kiro.hook
 .kiro/agents/sp-*.md
 ```
@@ -57,7 +59,7 @@ bash ./install/install.sh "<你的项目根目录>"
 删除项目中的这些文件即可：
 
 ```text
-.kiro/steering/superpowers-discipline.md
+.kiro/steering/superpowers-*.md
 .kiro/hooks/*sp-*.kiro.hook
 .kiro/agents/sp-*.md
 ```
