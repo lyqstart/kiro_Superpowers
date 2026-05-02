@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Branch Finishing",
+  "description": "After implementation task verification, require safe branch finishing options instead of automatic merge or discard.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If this was an implementation-class task and verification passed, apply branch finishing discipline. Summarize current branch/worktree, changed files, and verification evidence. Then present exactly four numbered options: 1. 合并回主分支 2. 推送并创建 PR 3. 保留分支 4. 丢弃本次工作. Do not choose for the user. Do not merge automatically. Discard requires a second explicit confirmation. Use .kiro/scripts/sp-finish-branch.sh or .kiro/scripts/sp-finish-branch.ps1 only after the user chooses. If verification is missing or failed, do not offer merge as ready."
+  }
+}

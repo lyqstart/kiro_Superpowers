@@ -24,6 +24,20 @@ required = [
     'workspace-assets/.kiro/hooks/02-sp-agent-stop-sanity-check.kiro.hook',
     'workspace-assets/.kiro/hooks/03-sp-manual-task-readiness-review.kiro.hook',
     'workspace-assets/.kiro/hooks/04-sp-manual-final-review.kiro.hook',
+    'workspace-assets/.kiro/hooks/05-sp-worktree-gate.kiro.hook',
+    'workspace-assets/.kiro/hooks/06-sp-branch-finishing.kiro.hook',
+    'workspace-assets/.kiro/steering/superpowers-worktree-automation.md',
+    'workspace-assets/.kiro/steering/superpowers-branch-finishing.md',
+    'workspace-assets/.kiro/scripts/sp-worktree-create.sh',
+    'workspace-assets/.kiro/scripts/sp-finish-branch.sh',
+    'workspace-assets/.kiro/scripts/sp-worktree-create.ps1',
+    'workspace-assets/.kiro/scripts/sp-finish-branch.ps1',
+    'power/steering/worktree-automation.md',
+    'power/steering/branch-finishing.md',
+    'scripts/sp-worktree-create.sh',
+    'scripts/sp-finish-branch.sh',
+    'scripts/sp-worktree-create.ps1',
+    'scripts/sp-finish-branch.ps1',
     'workspace-assets/.kiro/agents/sp-implementer.md',
     'workspace-assets/.kiro/agents/sp-spec-reviewer.md',
     'workspace-assets/.kiro/agents/sp-code-reviewer.md',
@@ -61,7 +75,7 @@ for p in (root / 'workspace-assets/.kiro/agents').glob('sp-*.md'):
 
 # Power metadata checks.
 power = (root / 'power/POWER.md').read_text(encoding='utf-8')
-for token in ['version: "0.3.0"', 'status-banner.md', 'superpowers-router.md']:
+for token in ['version: "0.4.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md', 'branch-finishing.md']:
     if token not in power:
         errors.append(f'POWER.md missing token: {token}')
 
@@ -75,6 +89,8 @@ for token in [
     '新增数据导出功能',
     '修复登录失败的问题',
     '继续当前 spec 的下一个任务',
+    '合并回主分支',
+    '丢弃本次工作',
 ]:
     if token not in readme and token not in usage and token not in install:
         errors.append(f'Compatibility token missing: {token}')
@@ -87,7 +103,7 @@ for p in root.rglob('*'):
 
 # Capability matrix must mention core statuses.
 matrix = (root / 'SUPERPOWERS_CAPABILITY_MATRIX.md').read_text(encoding='utf-8')
-for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch']:
+for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch', 'Worktree 自动化', 'Branch finishing']:
     if token not in matrix:
         errors.append(f'Matrix missing capability: {token}')
 
@@ -101,6 +117,7 @@ print('- Package structure: PASS')
 print('- Power structure: PASS')
 print('- Hook JSON: PASS')
 print('- Agent frontmatter: PASS')
-print('- v0.2 user entrypoints: PASS')
+print('- v0.2/v0.3 user entrypoints: PASS')
 print('- ai_dev_os absent: PASS')
 print('- CHANGELOG/MIGRATION/capability matrix: PASS')
+print('- v0.4 worktree/branch finishing files: PASS')

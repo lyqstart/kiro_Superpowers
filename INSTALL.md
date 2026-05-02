@@ -13,7 +13,7 @@
 例如：
 
 ```text
-请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_3_0
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：D:\tools\kiro_superpowers_discipline_v0_4_0
 ```
 
 Kiro 会读取本包的 `INSTALL_FOR_KIRO.md`，运行安装脚本。
@@ -50,8 +50,12 @@ bash ./install/install.sh "<你的项目根目录>"
 .kiro/steering/superpowers-discipline.md
 .kiro/steering/superpowers-status-banner.md
 .kiro/steering/superpowers-router.md
+.kiro/steering/superpowers-worktree-automation.md
+.kiro/steering/superpowers-branch-finishing.md
 .kiro/hooks/*.kiro.hook
 .kiro/agents/sp-*.md
+.kiro/scripts/sp-*.sh
+.kiro/scripts/sp-*.ps1
 ```
 
 ## 卸载
@@ -62,6 +66,8 @@ bash ./install/install.sh "<你的项目根目录>"
 .kiro/steering/superpowers-*.md
 .kiro/hooks/*sp-*.kiro.hook
 .kiro/agents/sp-*.md
+.kiro/scripts/sp-*.sh
+.kiro/scripts/sp-*.ps1
 ```
 
 Power 在 Kiro Powers 面板中卸载。

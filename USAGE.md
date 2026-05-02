@@ -2,7 +2,7 @@
 
 目标：用户不背流程。你正常说需求，Kiro 自动按纪律执行。
 
-v0.3.0 新增状态标识。每次开始任务时，你应该先看到类似：
+每次开始任务时，你应该先看到类似：
 
 ```text
 【Kiro规格主控：启用】
@@ -30,19 +30,17 @@ Kiro 应该自动做：
   ↓
 创建或更新 Feature Spec
   ↓
-生成 requirements.md
+生成 requirements/design/tasks
   ↓
-确认关键验收标准
+判断是否是实现类任务
   ↓
-生成 design.md
-  ↓
-生成 tasks.md
-  ↓
-执行前检查 task 是否可测试、可验证、可审查
+需要时进入 worktree gate
   ↓
 按 TDD 执行任务
   ↓
 完成前验证和审查
+  ↓
+通过后进入 branch finishing 四选项
 ```
 
 ## 2. 修 bug
@@ -60,17 +58,19 @@ Kiro 应该自动做：
   ↓
 判断为 bugfix
   ↓
-记录复现步骤、当前行为、期望行为、不变行为
-  ↓
 先复现
   ↓
 查根因
+  ↓
+需要时创建隔离 worktree
   ↓
 写失败测试或替代复现验证
   ↓
 最小修复
   ↓
 验证 bug 修复和回归行为
+  ↓
+通过后进入 branch finishing 四选项
 ```
 
 ## 3. 继续任务
@@ -86,17 +86,17 @@ Kiro 应该自动做：
 ```text
 显示状态标识
   ↓
-找到当前 spec
-  ↓
-找到下一个未完成 task
+找到当前 spec 和下一个未完成 task
   ↓
 读取 requirements/design/tasks
   ↓
 执行 pre-task gate
   ↓
+如果是实现类任务，执行 worktree gate
+  ↓
 执行、验证、审查
   ↓
-通过后标记完成
+通过后标记完成并进入 branch finishing
 ```
 
 ## 4. 检查是否完成
@@ -123,12 +123,26 @@ Kiro 应该自动做：
 给出：完成 / 未完成 / 阻塞
 ```
 
+## 5. 分支收尾
+
+任务通过验证后，Kiro 不应该自动合并，而应该给出：
+
+```text
+1. 合并回主分支
+2. 推送并创建 PR
+3. 保留分支
+4. 丢弃本次工作
+```
+
+选择 4 时必须二次确认。
+
 ## 用户不需要再说的话
 
 日常不要要求用户写：
 
 ```text
 必须先读取 requirements.md、design.md、tasks.md
+必须创建 worktree
 必须按 RED/GREEN/REFACTOR
 必须运行验证命令
 ```

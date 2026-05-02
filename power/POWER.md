@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离"
 ]
 author: "ChatGPT generated adapter"
-version: "0.3.0"
+version: "0.4.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -120,6 +120,31 @@ version: "0.3.0"
 
 如果意图不清，只问一个最小必要问题，优先给编号选项。
 
+## v0.4 Worktree Automation and Branch Finishing
+
+实现类任务默认进入 worktree 流程：
+
+- 功能实现、bugfix、重构、数据库/API 变更、Kiro task 执行：默认检查 git 状态，并优先创建隔离 worktree。
+- 小修改、文档修改、只读分析：不强制 worktree，但仍要说明影响范围。
+- 当前分支是 `main` 或 `master` 时，不直接开发，除非用户明确确认。
+- 创建 worktree 前必须检查 `git status --short`。脏工作区必须停止并报告。
+- 创建 branch/worktree 后，如果能识别项目验证命令，应先运行 baseline 验证。
+
+任务完成并通过验证后，进入 branch finishing，不自动合并：
+
+1. 合并回主分支
+2. 推送并创建 PR
+3. 保留分支
+4. 丢弃本次工作
+
+丢弃必须二次确认。没有明确确认，不允许删除或清理用户代码。
+
+可用脚本：
+
+- Windows: `.kiro/scripts/sp-worktree-create.ps1`、`.kiro/scripts/sp-finish-branch.ps1`
+- macOS/Linux: `.kiro/scripts/sp-worktree-create.sh`、`.kiro/scripts/sp-finish-branch.sh`
+
+
 ## 不可破坏的规则
 
 1. **没有规格，不进入中大型实现。**
@@ -177,6 +202,8 @@ version: "0.3.0"
 - `review-discipline.md`
 - `subagent-routing.md`
 - `worktree-discipline.md`
+- `worktree-automation.md`
+- `branch-finishing.md`
 
 ## 安装请求处理
 

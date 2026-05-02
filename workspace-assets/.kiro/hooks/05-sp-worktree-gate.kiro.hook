@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Worktree Gate",
+  "description": "For implementation-class tasks, enforce safe worktree decision before code edits.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the Superpowers worktree gate. If this is implementation, bugfix, refactor, DB/API, or code-changing task, inspect git state before editing. Do not edit directly on main/master unless the user explicitly confirms. If the tree is dirty, stop and report. Prefer creating an isolated worktree with .kiro/scripts/sp-worktree-create.sh or .kiro/scripts/sp-worktree-create.ps1. If this is documentation-only, text-only, config explanation, or read-only analysis, say worktree is not required and continue. Keep the user-facing note short."
+  }
+}
