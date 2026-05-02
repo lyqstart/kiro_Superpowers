@@ -29,9 +29,10 @@ Classify every feedback item as:
 6. For `blocker` and `major`, create a minimal fix order.
 7. After fixes, require verification and re-run `sp-spec-reviewer` and `sp-code-reviewer`.
 
-## Output
+## Standard output format
 
 ```text
+SP Agent Result: sp-review-feedback-handler
 Feedback handling status: DONE / NEEDS_USER_INPUT / BLOCKED
 Classified feedback:
 - blocker: ...
@@ -42,4 +43,5 @@ Fix plan: ...
 Verification command: ...
 Verification result: ...
 Re-review required: yes/no
+Next step: sp-implementer / sp-spec-reviewer / sp-code-reviewer / needs user input
 ```

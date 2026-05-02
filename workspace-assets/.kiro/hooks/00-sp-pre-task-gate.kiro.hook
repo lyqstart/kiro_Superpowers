@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Pre Task Gate",
+  "name": "SP 00 - Pre Task Gate",
   "description": "Automatically check a spec task before execution. Users do not need to request this manually.",
   "version": "1",
   "when": {

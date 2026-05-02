@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Post Task Branch Finishing Check",
+  "name": "SP 10 - Post Task Branch Finishing Check",
   "description": "After all task completion conditions pass, require branch finishing options for code-changing work.",
   "version": "1",
   "when": {

@@ -40,9 +40,10 @@ Report status as one of:
 - `NEEDS_CONTEXT`
 - `BLOCKED`
 
-## Required report
+## Standard output format
 
 ```text
+SP Agent Result: sp-implementer
 Status: DONE / DONE_WITH_CONCERNS / NEEDS_CONTEXT / BLOCKED
 Task: ...
 Spec context received: yes/no
@@ -51,7 +52,7 @@ Tests added/updated: ...
 Verification command: ...
 Verification result: ...
 Concerns: ...
-Next required reviewer: sp-test-verifier
+Next step: sp-test-verifier / needs user input / blocked
 ```
 
 ## User burden rule

@@ -8,7 +8,7 @@ keywords: [
   "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed"
 ]
 author: "ChatGPT generated adapter"
-version: "0.7.0"
+version: "0.8.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -217,6 +217,16 @@ Task completion contract：
 - BLOCKED：缺少上下文、需要用户确认、环境受限或 git 状态不安全。
 
 
+## v0.8 Stability and Documentation Rules
+
+This version is a stabilization release. Keep the user experience simple:
+
+- Users should only use natural language such as “新增 xxx”, “修复 xxx”, “继续当前 spec 的下一个任务”.
+- Do not ask the user to manually declare Superpowers Discipline.
+- Use the unified status banner at the start of development, bugfix, continue-task, review, or verification work.
+- Preserve existing v0.2-v0.7 behavior: worktree gate, branch finishing, subagent loop, review feedback loop, parallel safety, task execution contract, and task completion contract.
+- Use standard subagent result blocks beginning with `SP Agent Result:`.
+
 ## 不可破坏的规则
 
 1. **没有规格，不进入中大型实现。**
@@ -303,3 +313,6 @@ Task completion contract：
 <!-- v0.7 steering: executing-plans-discipline.md -->
 
 <!-- v0.7 steering: task-completion-contract.md -->
+
+
+> 稳定规则：不要求用户写长提示词。

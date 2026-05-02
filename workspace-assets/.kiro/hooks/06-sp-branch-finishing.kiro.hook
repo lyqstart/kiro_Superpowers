@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Branch Finishing",
+  "name": "SP 06 - Branch Finishing",
   "description": "After implementation task verification, require safe branch finishing options instead of automatic merge or discard.",
   "version": "1",
   "when": {

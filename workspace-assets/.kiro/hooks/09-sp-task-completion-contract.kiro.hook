@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Task Completion Contract",
+  "name": "SP 09 - Task Completion Contract",
   "description": "Before accepting task completion, require verification command, result, changed files, requirement/design/task mapping, and remaining risks.",
   "version": "1",
   "when": {

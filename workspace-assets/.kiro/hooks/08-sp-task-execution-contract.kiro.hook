@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Task Execution Contract",
+  "name": "SP 08 - Task Execution Contract",
   "description": "Before executing a Kiro task, require critical task reading, requirement/design linkage, scope boundaries, and a verification plan.",
   "version": "1",
   "when": {

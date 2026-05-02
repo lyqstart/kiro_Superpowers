@@ -1,37 +1,44 @@
 # CHANGELOG
 
-## v0.7.0
+## v0.8.0
 
-新增：
+新增/整理：
 
-1. Kiro task execution contract：执行前必须批判性阅读 task，检查 requirement/design/task 关联、范围、不做范围、完成定义和验证方式。
-2. Executing-plans 完整纪律：task 有歧义先问，不许猜；遇到 blocker 停止；测试或 verification 失败不能继续下一个 task。
-3. Task completion contract：完成前必须给出验证命令、验证结果、改动文件、满足的 requirement/design/task 和剩余风险。
-4. 增强 hooks：新增 `08-sp-task-execution-contract.kiro.hook`、`09-sp-task-completion-contract.kiro.hook`、`10-sp-post-task-branch-finishing-check.kiro.hook`。
-5. 新增 steering：`kiro-task-execution-contract.md`、`executing-plans-discipline.md`、`task-completion-contract.md`。
-6. 更新 POWER、README、USAGE、能力矩阵和校验脚本。
+1. 稳定化整理：检查 v0.3 到 v0.7 的能力描述，统一术语、状态标识、hook 展示名称和 agent 输出格式。
+2. 文档整理：重写 README、INSTALL、UNINSTALL、USAGE、TROUBLESHOOTING，保留一句话安装和自然语言日常入口。
+3. 验证增强：增强 `scripts/validate_package.py`，检查 hooks、agents、scripts、能力矩阵、文档入口、版本号和禁用路径。
+4. 用户体验简化：继续要求用户只说自然语言，不要求手动声明 Superpowers Discipline，不要求写长提示词。
 
 保持兼容：
 
-- v0.2/v0.3/v0.4/v0.5/v0.6 的安装方式不变。
+- v0.2-v0.7 的安装方式不变。
+- v0.2-v0.7 的卸载方式不变。
 - 日常自然语言入口不变。
 - v0.4 worktree 和 branch finishing 保持不变。
 - v0.5 subagent task loop 和 review feedback loop 保持不变。
 - v0.6 parallel agents 安全策略保持不变。
+- v0.7 task execution/completion contract 保持不变。
 - 不引入 ai_dev_os。
 - 不要求用户写长提示词。
 
+## v0.7.0
+
+- 新增 Kiro task execution contract。
+- 新增 executing-plans 完整纪律。
+- 新增 task completion contract。
+- 新增 hooks：`08-sp-task-execution-contract.kiro.hook`、`09-sp-task-completion-contract.kiro.hook`、`10-sp-post-task-branch-finishing-check.kiro.hook`。
+
 ## v0.6.0
 
-- 新增 parallel agents 安全并行策略：只有满足安全条件才允许并行。
-- 新增 Parallel Dispatch Plan：并行前必须列出目标、文件、接口、数据库表、迁移脚本、状态机、验证命令、agent 和风险。
+- 新增 parallel agents 安全并行策略。
+- 新增 Parallel Dispatch Plan。
 - 新增 `parallel-agent-policy.md` steering。
-- 新增 `07-sp-parallel-safety-check.kiro.hook` 手动并行安全检查 hook。
+- 新增 `07-sp-parallel-safety-check.kiro.hook`。
 
 ## v0.5.0
 
-- 新增 subagent task loop：每个 Kiro task 固定经过 `sp-implementer → sp-test-verifier → sp-spec-reviewer → sp-code-reviewer`。
-- 新增 review feedback loop：feedback 按 `blocker / major / minor / question` 分级处理。
+- 新增 subagent task loop。
+- 新增 review feedback loop。
 - 新增 `sp-review-feedback-handler`。
 
 ## v0.4.0

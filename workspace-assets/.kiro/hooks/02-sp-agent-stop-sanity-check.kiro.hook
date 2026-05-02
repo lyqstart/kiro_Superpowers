@@ -1,6 +1,6 @@
 {
   "enabled": false,
-  "name": "SP Agent Stop Sanity Check",
+  "name": "SP 02 - Agent Stop Sanity Check",
   "description": "Optional low-noise guard: catch unsupported completion claims. Disabled by default.",
   "version": "1",
   "when": {

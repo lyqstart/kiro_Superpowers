@@ -2,7 +2,9 @@
 
 目标：用户不背流程。你正常说需求，Kiro 自动按纪律执行。
 
-每次开始任务时，你应该先看到类似：
+## 统一状态标识
+
+每次开始开发、修复、继续任务、审查或验收时，你应该先看到类似：
 
 ```text
 【Kiro规格主控：启用】
@@ -13,7 +15,9 @@
 当前Gate：passed
 ```
 
-## 1. 新功能
+状态标识要短。用户不需要手动声明 Superpowers Discipline。
+
+## 新功能
 
 用户说：
 
@@ -21,31 +25,9 @@
 新增数据导出功能
 ```
 
-Kiro 应该自动做：
+Kiro 应自动：显示状态标识 → 创建/更新 Feature Spec → requirements/design/tasks → worktree gate → TDD → subagent task loop → task completion contract → branch finishing。
 
-```text
-显示状态标识
-  ↓
-判断为新功能
-  ↓
-创建或更新 Feature Spec
-  ↓
-生成 requirements/design/tasks
-  ↓
-执行 task execution contract
-  ↓
-需要时进入 worktree gate
-  ↓
-按 TDD 执行任务
-  ↓
-subagent task loop
-  ↓
-task completion contract
-  ↓
-通过后进入 branch finishing 四选项
-```
-
-## 2. 修 bug
+## 修 bug
 
 用户说：
 
@@ -53,31 +35,9 @@ task completion contract
 修复登录接口偶发 500 的问题
 ```
 
-Kiro 应该自动做：
+Kiro 应自动：显示状态标识 → 判断为 bugfix → 先复现 → 查根因 → 失败测试/替代验证 → 最小修复 → review → task completion contract。
 
-```text
-显示状态标识
-  ↓
-判断为 bugfix
-  ↓
-先复现
-  ↓
-查根因
-  ↓
-执行 task execution contract
-  ↓
-需要时创建隔离 worktree
-  ↓
-写失败测试或替代复现验证
-  ↓
-最小修复
-  ↓
-task completion contract
-  ↓
-通过后进入 branch finishing 四选项
-```
-
-## 3. 继续任务
+## 继续任务
 
 用户说：
 
@@ -85,27 +45,9 @@ task completion contract
 继续当前 spec 的下一个任务
 ```
 
-Kiro 应该自动做：
+Kiro 应自动：找到当前 spec 和下一个未完成 task → 读取 requirements/design/tasks → 执行 task execution contract → worktree gate → subagent loop → completion contract。
 
-```text
-显示状态标识
-  ↓
-找到当前 spec 和下一个未完成 task
-  ↓
-读取 requirements/design/tasks
-  ↓
-执行 task execution contract
-  ↓
-如果是实现类任务，执行 worktree gate
-  ↓
-执行、验证、审查
-  ↓
-执行 task completion contract
-  ↓
-通过后标记完成并进入 branch finishing
-```
-
-## 4. 检查是否完成
+## 检查是否完成
 
 用户说：
 
@@ -113,23 +55,9 @@ Kiro 应该自动做：
 检查当前任务是否真的完成
 ```
 
-Kiro 应该自动做：
+Kiro 应自动：查看 diff → 运行测试/构建/lint → spec review → code review → 输出 `COMPLETE / NOT COMPLETE / BLOCKED`。
 
-```text
-显示状态标识
-  ↓
-查看 diff
-  ↓
-运行测试/构建/lint
-  ↓
-检查 spec compliance
-  ↓
-检查代码质量
-  ↓
-输出 COMPLETE / NOT COMPLETE / BLOCKED
-```
-
-## 5. v0.7 task execution contract
+## Task execution contract
 
 执行前必须确认：
 
@@ -144,7 +72,7 @@ requirement/design/task：...
 
 如果 task 有歧义、缺少 requirement/design 关联、太大、或包含范围外内容，必须暂停，不许猜。
 
-## 6. v0.7 task completion contract
+## Task completion contract
 
 完成前必须输出：
 
@@ -160,7 +88,7 @@ requirement/design/task：...
 
 不能用“已经完成”代替验证证据。
 
-## 7. v0.5 subagent task loop
+## Subagent task loop
 
 实现类 task 应自动进入固定 loop：
 
@@ -176,13 +104,11 @@ sp-test-verifier
 sp-spec-reviewer
   ↓
 sp-code-reviewer
-  ↓
-通过后才允许标记 task 完成
 ```
 
 如果 spec review 不通过，不能进入 code review。如果 code review 有 blocker/major，不能标记完成。
 
-## 8. v0.5 review feedback loop
+## Review feedback loop
 
 审查反馈必须分级：
 
@@ -193,19 +119,11 @@ minor：记录建议，不影响核心完成判断
 question：暂停提问，不许猜
 ```
 
-Kiro 可以调用 `sp-review-feedback-handler` 处理反馈，但用户不需要手动点名。
+## Parallel agents
 
-## 9. v0.6 parallel agents 安全并行
+用户不需要主动要求并行。Kiro 判断多个任务可能并行时，必须先输出 `Parallel Dispatch Plan`。默认允许并行 context gathering / review，不默认并行 implementation。边界不清晰时禁止并行。
 
-用户不需要主动要求并行。Kiro 判断多个任务可能并行时，必须先输出：
-
-```text
-Parallel Dispatch Plan
-```
-
-默认允许并行 context gathering / review，不默认并行 implementation。如果任务边界不清晰，禁止并行。并行结束后，必须统一进入 spec review / code review / test verification。
-
-## 10. 分支收尾
+## Branch finishing
 
 任务通过验证后，Kiro 不应该自动合并，而应该给出：
 
@@ -218,15 +136,5 @@ Parallel Dispatch Plan
 
 选择 4 时必须二次确认。
 
-## 用户不需要再说的话
 
-日常不要要求用户写：
-
-```text
-必须先读取 requirements.md、design.md、tasks.md
-必须创建 worktree
-必须按 RED/GREEN/REFACTOR
-必须运行验证命令
-```
-
-这些是系统纪律，不是用户输入负担。
+> 稳定规则：不要求用户写长提示词。

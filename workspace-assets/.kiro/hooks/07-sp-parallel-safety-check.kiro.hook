@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Parallel Safety Check",
+  "name": "SP 07 - Parallel Safety Check",
   "description": "Before dispatching parallel agents, require a conflict check and an explicit Parallel Dispatch Plan.",
   "version": "1",
   "when": {

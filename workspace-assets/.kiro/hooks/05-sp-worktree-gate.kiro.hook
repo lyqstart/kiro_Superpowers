@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "name": "SP Worktree Gate",
+  "name": "SP 05 - Worktree Gate",
   "description": "For implementation-class tasks, enforce safe worktree decision before code edits.",
   "version": "1",
   "when": {

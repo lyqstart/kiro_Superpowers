@@ -23,13 +23,14 @@ Verify that the task has fresh evidence before review continues.
 
 If verification evidence is missing, output `BLOCKED`. Do not let the workflow proceed to spec review.
 
-## Output
+## Standard output format
 
 ```text
+SP Agent Result: sp-test-verifier
 Verification: PASS / BLOCKED / PASS_WITH_CONCERNS
 Command run: ...
 Result: ...
 Evidence: ...
 Missing evidence: ...
-Next step: sp-spec-reviewer / fix verification first
+Next step: sp-spec-reviewer / fix verification first / blocked
 ```

@@ -1,6 +1,6 @@
 # Parallel Agents Safety Policy
 
-版本：v0.7.0
+版本：v0.8.0
 
 ## 定位
 

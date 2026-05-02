@@ -36,9 +36,10 @@ If there is any blocker or major issue, output `NEEDS_CHANGES`; the task must no
 
 If there is any question, output `NEEDS_CONTEXT`; the main agent must pause and ask or gather context.
 
-## Output
+## Standard output format
 
 ```text
+SP Agent Result: sp-code-reviewer
 Code Quality: PASS / NEEDS_CHANGES / NEEDS_CONTEXT
 Blockers: ...
 Major issues: ...

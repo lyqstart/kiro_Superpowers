@@ -6,7 +6,7 @@
 请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：<解压目录>
 ```
 
-你应该按下面流程执行，不要让用户手动复制复杂命令。
+你应该自动完成安装，不要让用户复制复杂命令。
 
 ## 1. 判断系统
 
@@ -18,7 +18,7 @@
 Windows：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File "<解压目录>\install\install.ps1" -ProjectRoot "."
+powershell -ExecutionPolicy Bypass -File "<解压目录>\install\install.ps1" -ProjectRoot "." -Force
 ```
 
 macOS/Linux：
@@ -35,17 +35,14 @@ bash "<解压目录>/install/install.sh" "."
 .kiro/steering/superpowers-discipline.md
 .kiro/steering/superpowers-status-banner.md
 .kiro/steering/superpowers-router.md
-.kiro/steering/superpowers-worktree-automation.md
-.kiro/steering/superpowers-branch-finishing.md
 .kiro/hooks/00-sp-pre-task-gate.kiro.hook
-.kiro/hooks/01-sp-post-task-verification.kiro.hook
-.kiro/hooks/05-sp-worktree-gate.kiro.hook
-.kiro/hooks/06-sp-branch-finishing.kiro.hook
+.kiro/hooks/09-sp-task-completion-contract.kiro.hook
 .kiro/agents/sp-implementer.md
 .kiro/agents/sp-spec-reviewer.md
 .kiro/agents/sp-code-reviewer.md
 .kiro/agents/sp-test-verifier.md
 .kiro/agents/sp-debugger.md
+.kiro/agents/sp-review-feedback-handler.md
 .kiro/scripts/sp-worktree-create.sh
 .kiro/scripts/sp-finish-branch.sh
 .kiro/scripts/sp-worktree-create.ps1
