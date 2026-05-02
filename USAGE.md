@@ -159,7 +159,38 @@ question：暂停提问，不许猜
 
 Kiro 可以调用 `sp-review-feedback-handler` 处理反馈，但用户不需要手动点名。
 
-## 7. 分支收尾
+## 7. v0.6 parallel agents 安全并行
+
+用户不需要主动要求并行。Kiro 判断多个任务可能并行时，必须先输出：
+
+```text
+Parallel Dispatch Plan
+```
+
+计划必须说明：
+
+```text
+每个任务的目标
+每个任务涉及文件
+每个任务风险
+每个任务使用哪个 agent
+是否存在共享文件、共享接口、共享数据库表、共享迁移脚本、共享状态机
+最终结论：允许并行 / 禁止并行
+```
+
+默认允许并行 context gathering / review，不默认并行 implementation。如果任务边界不清晰，禁止并行。
+
+并行结束后，Kiro main agent 必须：
+
+```text
+汇总每个 agent 的结果
+检查冲突
+统一进入 spec review
+统一进入 code review
+统一进入 test verification
+```
+
+## 8. 分支收尾
 
 任务通过验证后，Kiro 不应该自动合并，而应该给出：
 

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Parallel Safety Check",
+  "description": "Before dispatching parallel agents, require a conflict check and an explicit Parallel Dispatch Plan.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply the Superpowers parallel agents safety policy. Before any parallel dispatch, output a Parallel Dispatch Plan listing each task goal, files, API contracts, DB tables, migration scripts, state machines, verification command, assigned agent, and risk. Check for shared files, shared interfaces, shared DB tables, shared migrations, and shared state. Default allow parallel context gathering/review, but do not default to parallel implementation. If boundaries are unclear or conflicts exist, decide: 禁止并行. After parallel work, summarize each agent result, check conflicts, then run unified spec review, code review, and test verification."
+  }
+}

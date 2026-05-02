@@ -48,6 +48,9 @@ required = [
     'workspace-assets/.kiro/steering/superpowers-task-by-task-subagent-loop.md',
     'workspace-assets/.kiro/steering/superpowers-review-feedback-loop.md',
     'workspace-assets/.kiro/agents/sp-review-feedback-handler.md',
+    'power/steering/parallel-agent-policy.md',
+    'workspace-assets/.kiro/steering/superpowers-parallel-agent-policy.md',
+    'workspace-assets/.kiro/hooks/07-sp-parallel-safety-check.kiro.hook',
     'install/install.ps1',
     'install/install.sh',
 ]
@@ -80,7 +83,7 @@ for p in (root / 'workspace-assets/.kiro/agents').glob('sp-*.md'):
 
 # Power metadata checks.
 power = (root / 'power/POWER.md').read_text(encoding='utf-8')
-for token in ['version: "0.5.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md', 'branch-finishing.md', 'task-by-task-subagent-loop.md', 'review-feedback-loop.md']:
+for token in ['version: "0.6.0"', 'status-banner.md', 'superpowers-router.md', 'worktree-automation.md', 'branch-finishing.md', 'task-by-task-subagent-loop.md', 'review-feedback-loop.md', 'parallel-agent-policy.md']:
     if token not in power:
         errors.append(f'POWER.md missing token: {token}')
 
@@ -101,6 +104,9 @@ for token in [
     'major',
     'minor',
     'question',
+    'Parallel Dispatch Plan',
+    '允许并行',
+    '禁止并行',
 ]:
     if token not in readme and token not in usage and token not in install:
         errors.append(f'Compatibility token missing: {token}')
@@ -113,7 +119,7 @@ for p in root.rglob('*'):
 
 # Capability matrix must mention core statuses.
 matrix = (root / 'SUPERPOWERS_CAPABILITY_MATRIX.md').read_text(encoding='utf-8')
-for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch', 'Worktree 自动化', 'Branch finishing', 'Review feedback loop', 'Subagent task loop']:
+for token in ['using-superpowers', 'subagent-driven-development', 'using-git-worktrees', 'finishing-a-development-branch', 'Worktree 自动化', 'Branch finishing', 'Review feedback loop', 'Subagent task loop', 'dispatching-parallel-agents', 'Parallel Dispatch Plan']:
     if token not in matrix:
         errors.append(f'Matrix missing capability: {token}')
 
@@ -132,3 +138,4 @@ print('- ai_dev_os absent: PASS')
 print('- CHANGELOG/MIGRATION/capability matrix: PASS')
 print('- v0.4 worktree/branch finishing files: PASS')
 print('- v0.5 subagent loop/review feedback files: PASS')
+print('- v0.6 parallel agents safety files: PASS')

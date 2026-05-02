@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查"
 ]
 author: "ChatGPT generated adapter"
-version: "0.5.0"
+version: "0.6.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -166,6 +166,23 @@ Gate 规则：
 
 收到 review feedback 后，必须按 `blocker / major / minor / question` 分级处理，并通过 `sp-review-feedback-handler` 形成修复闭环。
 
+## v0.6 Parallel Agents Safety Policy
+
+默认允许并行 context gathering / review，不默认并行 implementation。
+
+并行前必须输出 Parallel Dispatch Plan，至少包含：每个任务目标、涉及文件、接口契约、数据库表、迁移脚本、状态机、验证命令、使用 agent、风险，以及最终结论：允许并行 / 禁止并行。
+
+只有同时满足以下条件才允许并行：
+
+1. 不改同一批文件。
+2. 不改同一个接口契约。
+3. 不改同一张数据库表。
+4. 不共享迁移脚本。
+5. 不共享状态机。
+6. 每个并行任务有独立验证命令。
+
+如果边界不清晰，必须禁止并行。并行结束后，Kiro main agent 必须汇总结果、检查冲突，并统一进入 spec review / code review / test verification。
+
 
 ## 不可破坏的规则
 
@@ -228,6 +245,7 @@ Gate 规则：
 - `branch-finishing.md`
 - `task-by-task-subagent-loop.md`
 - `review-feedback-loop.md`
+- `parallel-agent-policy.md`
 
 ## 安装请求处理
 

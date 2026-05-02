@@ -1,58 +1,48 @@
 # CHANGELOG
 
-## v0.5.0
+## v0.6.0
 
 新增：
 
-1. subagent task loop：每个 Kiro task 固定经过 `sp-implementer → sp-test-verifier → sp-spec-reviewer → sp-code-reviewer`。
-2. review feedback loop：feedback 按 `blocker / major / minor / question` 分级处理。
-3. 新增 `sp-review-feedback-handler`，用于审查反馈闭环处理。
-4. 新增 `task-by-task-subagent-loop.md` 与 `review-feedback-loop.md` steering。
-5. 更新 POWER、README、USAGE、能力矩阵和校验脚本。
+1. parallel agents 安全并行策略：只有满足安全条件才允许并行。
+2. Parallel Dispatch Plan：并行前必须列出目标、文件、接口、数据库表、迁移脚本、状态机、验证命令、agent 和风险。
+3. 新增 `parallel-agent-policy.md` steering。
+4. 新增 `superpowers-parallel-agent-policy.md` workspace steering。
+5. 新增 `07-sp-parallel-safety-check.kiro.hook` 手动并行安全检查 hook。
+6. 更新 POWER、README、USAGE、能力矩阵和校验脚本。
 
 保持兼容：
 
-- v0.2/v0.3/v0.4 的安装方式不变。
+- v0.2/v0.3/v0.4/v0.5 的安装方式不变。
 - 日常自然语言入口不变。
 - v0.4 worktree 和 branch finishing 保持不变。
+- v0.5 subagent task loop 和 review feedback loop 保持不变。
 - 不引入 ai_dev_os。
 - 不要求用户写长提示词。
 
-# Changelog
-
 ## v0.5.0
 
-- 新增 worktree 自动化纪律：实现类任务默认检查 git 状态，避免直接在 main/master 上开发。
-- 新增 branch finishing 纪律：任务验证通过后提供合并、PR、保留、丢弃四个编号选项。
-- 新增安全脚本：`sp-worktree-create.sh`、`sp-worktree-create.ps1`、`sp-finish-branch.sh`、`sp-finish-branch.ps1`。
-- 新增 workspace scripts 安装：脚本会复制到项目 `.kiro/scripts/`。
-- 新增 hooks：`05-sp-worktree-gate.kiro.hook` 和 `06-sp-branch-finishing.kiro.hook`。
-- 新增 steering：`superpowers-worktree-automation.md` 和 `superpowers-branch-finishing.md`。
-- 更新 `POWER.md`、`README.md`、`USAGE.md`、`INSTALL.md`、`INSTALL_FOR_KIRO.md`、`MIGRATION.md`、能力矩阵和校验脚本。
-- 保持 v0.3.0 的安装、卸载、日常使用方式不变。
-- 仍不包含 ai_dev_os。
+- 新增 subagent task loop：每个 Kiro task 固定经过 `sp-implementer → sp-test-verifier → sp-spec-reviewer → sp-code-reviewer`。
+- 新增 review feedback loop：feedback 按 `blocker / major / minor / question` 分级处理。
+- 新增 `sp-review-feedback-handler`。
 
+## v0.4.0
 
-## v0.5.0
+- 新增 worktree 自动化纪律。
+- 新增 branch finishing 纪律。
+- 新增安全脚本：`sp-worktree-create.*`、`sp-finish-branch.*`。
 
-- 新增状态标识：任务开始时显示 Kiro 规格主控、Superpowers 执行纪律、当前阶段、当前流程、当前 task、当前 gate。
-- 新增 Superpowers Router：自然语言自动路由到新功能、bugfix、继续任务、审查、验证。
-- 新增 `SUPERPOWERS_CAPABILITY_MATRIX.md`：记录原 Superpowers 能力在 Kiro 版中的覆盖情况、未覆盖情况、后续计划。
-- 新增 workspace steering：`superpowers-status-banner.md` 和 `superpowers-router.md`。
-- 更新 `POWER.md`、`README.md`、`USAGE.md`、`INSTALL.md`、`INSTALL_FOR_KIRO.md`。
-- 保持 v0.2.0 的安装、卸载、日常使用方式不变。
-- 仍不包含 ai_dev_os。
+## v0.3.0
 
+- 新增状态标识。
+- 新增 Superpowers Router。
+- 新增 `SUPERPOWERS_CAPABILITY_MATRIX.md`。
 
-## v0.5.0
+## v0.2.0
 
-- 将日常入口改为自然语言，不再要求用户每次写长提示词。
-- 新增 `INSTALL_FOR_KIRO.md`：用户只需告诉 Kiro 解压目录。
-- 重写 `README.md`、`INSTALL.md`、`USAGE.md`。
-- 重写 `POWER.md`：增加自动识别新功能、bugfix、继续任务、完成检查的规则。
-- 重写 workspace steering：把复杂纪律藏到后台。
-- 保留 hooks 和 subagents，但默认让它们服务于自动流程。
-- 暂不包含 ai_dev_os。
+- 将日常入口改为自然语言。
+- 新增 `INSTALL_FOR_KIRO.md`。
+- 重写 README、INSTALL、USAGE。
 
 ## v0.1.0
 
