@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 22 - Branch Finishing Hardening",
+  "description": "Before branch finishing, require fresh verification, branch context, changed files, commits, and explicit confirmations for merge/discard/cleanup.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.2 Branch Finishing Hardening. Before showing the four finishing options, require fresh verification evidence. Before merge, show current branch, base branch, changed files, and require explicit '确认合并'. Before discard, show branch, worktree path, changed files, commits since base, and require explicit 'DISCARD_WORK'. Merge/discard must not delete user code by default. Cleanup worktree is a separate numbered/explicit confirmation and requires 'CLEAN_WORKTREE'. Use .kiro/scripts/sp-finish-branch.sh or .kiro/scripts/sp-finish-branch.ps1 only after the user chooses."
+  }
+}

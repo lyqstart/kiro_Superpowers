@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 21 - Baseline Verification Hardening",
+  "description": "After worktree creation, require baseline verification or a user-specified baseline command before implementation proceeds.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before implementation proceeds in a new worktree, confirm baseline verification evidence. Use explicit task verification command if available. Otherwise suggest common commands when detectable: npm test, npm run test, pnpm test, yarn test, pytest, go test ./..., cargo test. If no command is detectable, ask the user to specify one. If baseline failed, report BLOCKED and do not continue unless the user explicitly confirms."
+  }
+}

@@ -1,5 +1,29 @@
 # CHANGELOG
 
+## v1.2.0
+
+新增：
+
+1. Worktree hardening：创建 worktree 前检查当前 git 分支、干净工作区、`.worktrees/` 是否被 `.gitignore` 忽略；未忽略时提示用户确认是否添加，不自动 commit `.gitignore`。
+2. Worktree metadata：创建 worktree 后记录 worktree path、branch name、base branch、created time、related spec/task、baseline command、baseline result、baseline exit code。
+3. Baseline verification hardening：创建 worktree 后必须尝试 baseline 验证；可识别 npm/pnpm/yarn/pytest/go/cargo 常见验证命令；无法识别时要求用户指定。
+4. Branch finishing hardening：显示 finishing 四选项前必须先执行 fresh verification；合并前显示 branch/base/changed files；丢弃前显示 branch/worktree/changed files/commits。
+5. 安全确认增强：合并需要输入 `确认合并`；丢弃需要输入 `DISCARD_WORK`；worktree cleanup 是独立确认步骤，需要输入 `CLEAN_WORKTREE`。
+6. 脚本增强：增强 `sp-worktree-create.sh`、`sp-worktree-create.ps1`、`sp-finish-branch.sh`、`sp-finish-branch.ps1`，并同步到 `workspace-assets/.kiro/scripts/`。
+7. 新增 hooks：`20-sp-worktree-hardening.kiro.hook`、`21-sp-baseline-verification-hardening.kiro.hook`、`22-sp-branch-finishing-hardening.kiro.hook`。
+8. 新增 steering：`worktree-hardening.md`、`branch-finishing-hardening.md` 和对应 workspace steering。
+
+保持兼容：
+
+- v0.2-v1.1 的安装方式不变。
+- v0.2-v1.1 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4 worktree 和 branch finishing 基础入口保持不变，本版只增强安全性和证据。
+- v0.5-v1.1 的 subagent/review/task/TDD/refinement 能力保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
+
 ## v1.1.0
 
 新增：

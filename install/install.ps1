@@ -15,7 +15,7 @@ if (!(Test-Path $Source)) {
   throw "Source assets not found: $Source"
 }
 
-Write-Host "Installing Kiro Superpowers Discipline v1.1.0"
+Write-Host "Installing Kiro Superpowers Discipline v1.2.0"
 Write-Host "Project: $ResolvedProjectRoot"
 
 New-Item -ItemType Directory -Force -Path $Target | Out-Null

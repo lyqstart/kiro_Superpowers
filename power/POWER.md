@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore"
 ]
 author: "ChatGPT generated adapter"
-version: "1.1.0"
+version: "1.2.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -216,6 +216,23 @@ Task completion contract：
 - NOT COMPLETE：测试/构建/lint/verification/review 未通过。
 - BLOCKED：缺少上下文、需要用户确认、环境受限或 git 状态不安全。
 
+
+
+
+## v1.2 Worktree / Branch Finishing Hardening
+
+创建和收尾分支时必须更硬、更安全：
+
+- 创建 worktree 前检查当前 git 分支、干净工作区、`.worktrees/` 是否被 `.gitignore` 忽略。
+- 如果 `.worktrees/` 未被忽略，必须提示用户确认是否添加；不允许自动 commit `.gitignore`。
+- 创建 worktree 后必须记录 metadata：worktree path、branch、base branch、created time、related spec/task、baseline command、baseline result。
+- 创建 worktree 后必须尝试 baseline verification。能识别常见项目时建议 `npm test` / `pnpm test` / `yarn test` / `pytest` / `go test ./...` / `cargo test`；无法识别时要求用户指定。
+- baseline 失败时停止，不继续实现，除非用户明确确认失败是已知且可接受。
+- branch finishing 显示四个选项前必须先执行 fresh verification。
+- 合并前显示 current branch、base branch、changed files，并要求输入 `确认合并`。
+- 丢弃前显示 branch、worktree path、changed files、commits 列表，并要求输入 `DISCARD_WORK`。
+- 合并或丢弃后的 worktree cleanup 是单独确认步骤，要求输入 `CLEAN_WORKTREE`。
+- 默认不删除用户代码。危险操作必须二次确认。
 
 ## v0.8 Stability and Documentation Rules
 

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 20 - Worktree Hardening",
+  "description": "Before implementation-class tasks, require hardened worktree checks, gitignore review, metadata, and baseline result.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.2 Worktree Hardening. For implementation, bugfix, refactor, DB/API, or code-changing tasks, do not edit until git branch, clean status, .worktrees/.gitignore status, worktree metadata, and baseline verification are addressed. Prefer .kiro/scripts/sp-worktree-create.sh or .kiro/scripts/sp-worktree-create.ps1. If .worktrees/ is not ignored, ask whether to add it; do not auto-commit .gitignore. If baseline fails, stop unless the user explicitly confirms the failure is known and acceptable. Documentation-only or read-only tasks do not require worktree."
+  }
+}
