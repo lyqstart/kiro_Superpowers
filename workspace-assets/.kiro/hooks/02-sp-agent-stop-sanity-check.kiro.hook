@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "name": "SP Agent Stop Sanity Check",
+  "description": "Optional low-noise guard: catch unsupported completion claims. Disabled by default.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If your last message claimed work is done, fixed, passing, complete, or ready, check whether fresh verification evidence was included. If not, correct the status to unverified and name the exact command still required. Keep the correction brief."
+  }
+}

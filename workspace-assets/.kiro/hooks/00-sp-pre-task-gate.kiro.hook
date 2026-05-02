@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Pre Task Gate",
+  "description": "Automatically check a spec task before execution. Users do not need to request this manually.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply Superpowers Discipline automatically before this spec task starts. Do not ask the user to restate the workflow. Verify internally: current spec and task are known; requirements/bugfix, design, and tasks are available; scope and non-goals are clear; a TDD or alternative verification plan exists; completion criteria are testable. If something is missing, stop and ask only the smallest necessary question, preferably with numbered options. If ready, proceed with a concise plan."
+  }
+}

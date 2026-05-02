@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Manual Final Review",
+  "description": "Manual final verification before accepting work.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Perform final review using Superpowers Discipline. Check diff, tests/build/lint, spec compliance, code quality, and scope creep. Output concise status: COMPLETE / NOT COMPLETE / BLOCKED, with verification evidence and risks."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Manual Task Readiness Review",
+  "description": "Manual check for current spec task readiness.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review current spec task readiness using Superpowers Discipline. Output only PASS / NEEDS_REFINEMENT / BLOCKED, reasons, and the smallest next action."
+  }
+}

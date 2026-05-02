@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP Post Task Verification",
+  "description": "Automatically require fresh verification and review after a spec task completes.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply Superpowers Discipline automatically after this spec task. Do not accept completion by assertion. Run or identify the project-appropriate test/build/lint command, read the output, summarize changed files, perform spec compliance review, perform code quality review, and report unresolved risks. If verification is missing or fails, mark the task as not actually complete and state the next fix."
+  }
+}
