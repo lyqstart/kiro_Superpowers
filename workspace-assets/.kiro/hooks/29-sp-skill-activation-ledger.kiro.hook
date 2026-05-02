@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 29 - Skill Activation Ledger",
+  "description": "Require visible Skill Runtime Lite activation and ledger before development actions.",
+  "version": "1",
+  "when": {
+    "type": "userPromptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 Skill Runtime Lite. For any development, bugfix, review, verification, planning, or branch finishing request, identify relevant Superpowers skills, display the Skill Activation Banner, and update .kiro/superpowers-runtime/SKILL_ACTIVATION_LEDGER.md if file access is available. If no skill applies, say why. Do not proceed to implementation without activation."
+  }
+}

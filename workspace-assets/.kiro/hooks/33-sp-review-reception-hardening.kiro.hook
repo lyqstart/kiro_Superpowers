@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 33 - Review Reception Hardening",
+  "description": "Prevent blind implementation of review feedback.",
+  "version": "1",
+  "when": {
+    "type": "userPromptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "If the user or reviewer provides code review feedback, apply v2.0 Review Reception Hardening: read all items, understand, verify against codebase, evaluate, clarify unclear items, implement one item at a time, test each, and push back technically when needed."
+  }
+}

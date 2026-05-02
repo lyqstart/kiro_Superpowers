@@ -97,3 +97,7 @@ Next step: ...
 ```
 
 Do not use `COMPLETE` for a full task unless the Kiro main agent has fresh verification evidence and all gates passed. An agent may report `DONE` only for its limited role.
+
+## v2.0 Runtime Hardening
+
+Before acting, confirm the main agent provided a Subagent Task Packet and relevant skill activation context. If missing, return `NEEDS_CONTEXT`; do not infer spec background. For review or verification work, require changed files and fresh evidence where applicable.

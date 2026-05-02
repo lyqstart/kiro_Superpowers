@@ -179,3 +179,22 @@ Skip count：...
 ```
 
 危险操作必须二次确认。
+
+## v2.0 Runtime Behavior
+
+When a request matches development work, Kiro should now show Skill Runtime Lite activation, update the skill activation ledger when possible, and route through the relevant Superpowers skill cards.
+
+Expected start block:
+
+```text
+【Kiro规格主控：启用/待创建/未启用】
+【Superpowers执行纪律：启用】
+【Skill Runtime Lite：启用】
+匹配到的Skills：...
+当前阶段：...
+当前流程：...
+当前Task：...
+当前Gate：...
+```
+
+The user still speaks naturally. The runtime layer is the agent's responsibility.

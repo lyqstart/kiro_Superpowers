@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 30 - Spec Brainstorming Gate",
+  "description": "Require brainstorming-style spec flow before implementation.",
+  "version": "1",
+  "when": {
+    "type": "userPromptSubmit"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "For new feature, behavior change, component, or creative work, apply v2.0 Kiro Spec Brainstorming Gate: explore context, ask one focused question at a time, propose 2-3 approaches, present design sections, run spec self-review, and get user approval before implementation."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 34 - Final Whole-Feature Review",
+  "description": "Require whole-feature review before final COMPLETE/merge/PR.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "When all tasks appear complete, apply v2.0 Final Whole-Feature Review Gate before branch finishing or COMPLETE. Check spec/design/task coverage, diff scope, TDD evidence, reviews, fresh verification, and risks. If any blocker remains, report BLOCKED/PARTIAL/UNVERIFIED."
+  }
+}

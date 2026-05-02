@@ -77,3 +77,26 @@ DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UN
 ```
 
 并确认 Kiro Powers 面板已经添加 `<解压目录>/power`。
+
+## v2.0 Troubleshooting
+
+### Kiro does not show Skill Runtime Lite
+Ask:
+
+```text
+请显示 Skill Activation Ledger，并说明本次匹配到哪些 Superpowers skills。
+```
+
+### Kiro starts coding without brainstorming
+Stop it and say:
+
+```text
+停止。请先通过 v2.0 Kiro Spec Brainstorming Gate，不要进入实现。
+```
+
+### Kiro says COMPLETE without final review
+Ask:
+
+```text
+请先运行 Final Whole-Feature Review Gate 和 Fresh Verification Evidence，再判断是否 COMPLETE。
+```

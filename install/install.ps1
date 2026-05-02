@@ -15,12 +15,12 @@ if (!(Test-Path $Source)) {
   throw "Source assets not found: $Source"
 }
 
-Write-Host "Installing Kiro Superpowers Discipline v1.5.0"
+Write-Host "Installing Kiro Superpowers Discipline v2.0.0"
 Write-Host "Project: $ResolvedProjectRoot"
 
 New-Item -ItemType Directory -Force -Path $Target | Out-Null
 
-$Dirs = @("steering", "hooks", "agents", "scripts")
+$Dirs = @("steering", "hooks", "agents", "scripts", "superpowers-skills", "superpowers-templates")
 foreach ($dir in $Dirs) {
   $srcDir = Join-Path $Source $dir
   $dstDir = Join-Path $Target $dir

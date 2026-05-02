@@ -12,10 +12,10 @@ if [ ! -d "$SOURCE" ]; then
   exit 1
 fi
 
-echo "Installing Kiro Superpowers Discipline v1.5.0"
+echo "Installing Kiro Superpowers Discipline v2.0.0"
 echo "Project: $(cd "$PROJECT_ROOT" && pwd)"
 
-mkdir -p "$TARGET/steering" "$TARGET/hooks" "$TARGET/agents" "$TARGET/scripts"
+mkdir -p "$TARGET/steering" "$TARGET/hooks" "$TARGET/agents" "$TARGET/scripts" "$TARGET/superpowers-skills" "$TARGET/superpowers-templates" "$TARGET/superpowers-runtime"
 
 copy_dir() {
   local dir="$1"
@@ -32,6 +32,8 @@ copy_dir steering
 copy_dir hooks
 copy_dir agents
 copy_dir scripts
+copy_dir superpowers-skills
+copy_dir superpowers-templates
 
 if command -v python3 >/dev/null 2>&1; then
   python3 - "$TARGET/hooks" <<'PYINSTALL'

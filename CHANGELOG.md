@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v1.5.0
+## v2.0.0
 
 稳定版整理，不新增新的开发流程能力。
 
@@ -15,8 +15,8 @@
 - README / INSTALL / UNINSTALL / USAGE / TROUBLESHOOTING 总整理。
 - 统一 v0.9-v1.4 的状态词：DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED。
 - 统一 `SP Agent Result` 输出要求。
-- 更新能力矩阵到 v1.5.0。
-- 更新安装脚本版本号到 v1.5.0。
+- 更新能力矩阵到 v2.0.0。
+- 更新安装脚本版本号到 v2.0.0。
 
 ### Compatibility
 
@@ -231,3 +231,32 @@
 
 - 初始版本。
 - 提供 Kiro Power、Steering、Hooks、Custom Subagents、安装脚本。
+
+## v2.0.0
+
+Runtime-complete Kiro-native convergence release.
+
+Added:
+
+- Skill Runtime Lite
+- Skill Activation Ledger
+- Kiro-adapted skill cards
+- Kiro Spec Brainstorming Gate
+- Kiro Task Micro-Plan Contract
+- Task Execution Ledger
+- Review Reception Hardening
+- Final Whole-Feature Review Gate
+- TDD Violation Recovery
+- Debug Pattern Analysis
+- Parallel Agent Dispatch Contract
+- Worktree Directory Strategy
+- PR Template and Finish Metadata
+- Verification Transcript Capture
+- Kiro Mechanism Limitations document
+- Superpowers Remaining Gaps document
+
+Compatibility:
+
+- Existing install/uninstall/user entrypoints preserved.
+- No ai_dev_os introduced.
+- Destructive git operations remain confirmation-gated.

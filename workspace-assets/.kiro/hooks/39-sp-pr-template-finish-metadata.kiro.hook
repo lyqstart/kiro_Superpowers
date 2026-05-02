@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 39 - PR Template and Finish Metadata",
+  "description": "Require PR body and finish metadata before PR/merge/discard decisions.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before PR/merge/keep/discard, apply v2.0 PR Template and Finish Metadata. Record branch/base/worktree/changed files/commits/verification/chosen option/cleanup decision. PR body must include Summary, Spec/Task, Test Plan, Review Evidence, Risks."
+  }
+}

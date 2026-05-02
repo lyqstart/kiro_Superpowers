@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 31 - Micro-Plan Contract",
+  "description": "Require micro-plan for complex Kiro tasks before code changes.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 Kiro Task Micro-Plan Contract. If the task is complex, multi-module, behavior-changing, or lacks exact files/verification, create a micro-plan before implementation. If missing, block and ask for refinement."
+  }
+}

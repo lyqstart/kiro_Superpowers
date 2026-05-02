@@ -1,8 +1,8 @@
-# Kiro Superpowers Discipline v1.5.0
+# Kiro Superpowers Discipline v2.0.0
 
 把 Superpowers 的核心执行纪律改造成 Kiro 可用的 Power / Steering / Hooks / Custom Subagents。
 
-**v1.5.0 是稳定版整理。** 它不新增新的开发流程能力；只统一 v0.9-v1.4 的术语、状态标识、agent 输出格式、hook 说明、文档入口和校验脚本。安装、卸载和日常使用方式保持不变。
+**v2.0.0 是稳定版整理。** 它不新增新的开发流程能力；只统一 v0.9-v1.4 的术语、状态标识、agent 输出格式、hook 说明、文档入口和校验脚本。安装、卸载和日常使用方式保持不变。
 
 ## 最简单使用
 
@@ -95,3 +95,20 @@ Powers → Add power from Local Path → 选择 <解压目录>/power
 按 `UNINSTALL.md` 删除项目中的 `.kiro/steering/superpowers-*.md`、`.kiro/hooks/*sp-*.kiro.hook`、`.kiro/agents/sp-*.md`、`.kiro/scripts/sp-*`，再从 Kiro Powers 面板卸载本 Power。
 
 > 稳定规则：用户日常只说自然语言，不写长提示词。
+
+## v2.0.0 Runtime Completion Layer
+
+v2.0.0 is the first "runtime-complete" Kiro-native version. It adds Skill Runtime Lite, skill cards, ledgers, micro-plans, final feature review, stricter review reception, TDD violation recovery, worktree directory strategy, PR template, and verification transcript capture.
+
+Daily use remains unchanged:
+
+```text
+新增数据导出功能
+修复登录失败的问题
+继续当前 spec 的下一个任务
+检查当前任务是否真的完成
+```
+
+Users do not need to manually invoke Superpowers Discipline.
+
+See `KIRO_LIMITATIONS.md` and `SUPERPOWERS_REMAINING_GAPS.md` for the exact remaining differences from upstream Superpowers.

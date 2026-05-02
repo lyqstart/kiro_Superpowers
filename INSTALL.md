@@ -1,4 +1,4 @@
-# 安装 Kiro Superpowers Discipline v1.5.0
+# 安装 Kiro Superpowers Discipline v2.0.0
 
 ## 一句话安装
 
@@ -60,3 +60,15 @@ bash "<解压目录>/install/install.sh" "<项目根目录>"
 继续当前 spec 的下一个任务
 检查当前任务是否真的完成
 ```
+
+## v2.0 Installed Runtime Folders
+
+v2.0 also installs:
+
+```text
+.kiro/superpowers-skills/
+.kiro/superpowers-templates/
+.kiro/superpowers-runtime/
+```
+
+The user still installs with one sentence and uses natural language.

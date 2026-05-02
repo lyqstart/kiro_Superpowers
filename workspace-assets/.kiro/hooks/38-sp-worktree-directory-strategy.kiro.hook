@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 38 - Worktree Directory Strategy",
+  "description": "Choose worktree directory safely and explicitly.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 Worktree Directory Strategy before creating worktree: choose .worktrees/worktrees/configured/user/global explicitly, check gitignore, ask before changes, do not auto-commit ignore changes, and record metadata."
+  }
+}

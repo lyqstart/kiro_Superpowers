@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 32 - Task Execution Ledger",
+  "description": "Track task status and evidence during plan execution.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 Task Execution Ledger. Mark current task IN_PROGRESS before work. Do not continue from a BLOCKED/UNVERIFIED task. Update ledger with skills, verification, review, changed files, risk, and next step."
+  }
+}

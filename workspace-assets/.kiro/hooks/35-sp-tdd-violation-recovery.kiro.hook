@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 35 - TDD Violation Recovery",
+  "description": "Recover when implementation happened before RED evidence.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 TDD Violation Recovery. If behavior changed without prior RED evidence, report TDD_VIOLATION_DETECTED and choose recovery: revert and redo TDD, characterization test, or user-approved exception. No COMPLETE without documented recovery."
+  }
+}

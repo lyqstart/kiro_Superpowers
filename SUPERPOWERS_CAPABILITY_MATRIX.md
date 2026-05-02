@@ -1,10 +1,10 @@
 # Superpowers Capability Matrix
 
-版本：v1.5.0
+版本：v2.0.0
 
-说明：本表对照原 Superpowers 项目的核心能力，说明 Kiro 版落点、覆盖状态和后续计划。v1.5.0 是稳定版整理，不新增新的开发流程能力。
+说明：本表对照原 Superpowers 项目的核心能力，说明 Kiro 版落点、覆盖状态和后续计划。v2.0.0 是稳定版整理，不新增新的开发流程能力。
 
-| 原 Superpowers 能力 | Kiro 版落点 | v1.5.0 覆盖状态 | 当前说明 | 后续计划 |
+| 原 Superpowers 能力 | Kiro 版落点 | v2.0.0 覆盖状态 | 当前说明 | 后续计划 |
 |---|---|---|---|---|
 | using-superpowers | POWER.md + superpowers-router + status-banner + stable-output-contract | 部分覆盖 | 通过 Power/Steering/Hooks 引导，不是原版 skill tool 强制调用 | 后续可补 Skill Activation Ledger |
 | brainstorming | Kiro requirements/design gate | 部分覆盖 | 借 Kiro spec 主控，未完全复刻原版 2-3 方案和逐段确认 | 可补 Spec Brainstorming Gate |
@@ -21,7 +21,7 @@
 | finishing-a-development-branch | branch finishing scripts + branch-finishing-hardening | 强化覆盖 | v1.2 增加 verification、changed files、commits、二次确认、CLEAN_WORKTREE | 保持安全优先 |
 | writing-skills | 未实现 | 未覆盖 | 不是当前 Kiro 版目标 | 低优先级 |
 
-## v1.5.0 稳定版整理
+## v2.0.0 稳定版整理
 
 - 新增 `stable-output-contract.md`。
 - 统一状态词：DONE / COMPLETE / NOT COMPLETE / BLOCKED / NEEDS_CONTEXT / FAILED / PARTIAL / UNVERIFIED。
@@ -94,3 +94,24 @@
 - 统一 agent 输出格式
 - 整理 README / INSTALL / UNINSTALL / USAGE / TROUBLESHOOTING
 - 增强 validate-package.py
+
+## v2.0.0 Superpowers Runtime Completion Matrix
+
+| Upstream capability | v2.0 Kiro-native implementation | Status |
+|---|---|---|
+| using-superpowers | Skill Runtime Lite + sp-skill-router + Skill Activation Ledger + hooks 29/40 | Closest possible without native Kiro Skill tool |
+| brainstorming | Kiro Spec Brainstorming Gate + Kiro specs as source of truth | Implemented except original Visual Companion |
+| writing-plans | Kiro Task Micro-Plan Contract + Task Execution Ledger | Implemented in Kiro-native form |
+| executing-plans | Task Execution Ledger + execution contracts + final branch finishing | Implemented in Kiro-native form |
+| subagent-driven-development | Task Packet + Result Contract + review evidence + final feature review | Implemented at main-agent boundary; subagent internals remain Kiro-limited |
+| test-driven-development | TDD Evidence + Violation Recovery + anti-pattern gate | Implemented |
+| systematic-debugging | Root cause tracing + deep techniques + pattern analysis | Implemented |
+| verification-before-completion | Fresh evidence + transcript capture + completion claim hardening | Implemented |
+| requesting-code-review | Review Evidence + SHA/changed file contract + final review | Implemented |
+| receiving-code-review | Review Reception Hardening + technical pushback/YAGNI rules | Implemented |
+| dispatching-parallel-agents | Parallel Dispatch Contract + integration checklist | Implemented conservatively |
+| using-git-worktrees | Worktree hardening + directory strategy + metadata | Implemented conservatively |
+| finishing-a-development-branch | Finish hardening + PR template + metadata | Implemented conservatively |
+| writing-skills | Skill card only, no full authoring runtime | Not implemented by design |
+
+Remaining differences are documented in `KIRO_LIMITATIONS.md` and `SUPERPOWERS_REMAINING_GAPS.md`.

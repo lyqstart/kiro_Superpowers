@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 37 - Parallel Agent Dispatch Contract",
+  "description": "Require self-contained prompts and integration checks for parallel agents.",
+  "version": "1",
+  "when": {
+    "type": "preToolUse"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before dispatching multiple agents, apply v2.0 Parallel Agent Dispatch Contract: independent domains only, focused self-contained prompt per agent, no shared files/contracts/state, integration checklist, full verification if code changed."
+  }
+}

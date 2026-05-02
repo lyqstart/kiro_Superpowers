@@ -1,12 +1,12 @@
 # MIGRATION
 
-## 从 v1.4.0 升级到 v1.5.0
+## 从 v1.4.0 升级到 v2.0.0
 
-v1.5.0 是稳定版整理，不新增新的开发流程能力，不改变安装、卸载和日常使用方式。
+v2.0.0 是稳定版整理，不新增新的开发流程能力，不改变安装、卸载和日常使用方式。
 
 ### 需要做什么
 
-建议重新安装一次项目级文件，因为 v1.5.0 新增稳定输出 contract，并整理了文档和校验脚本。
+建议重新安装一次项目级文件，因为 v2.0.0 新增稳定输出 contract，并整理了文档和校验脚本。
 
 在 Kiro 中说：
 
@@ -357,3 +357,22 @@ workspace-assets/.kiro/agents/sp-*.md
 ## 卸载方式
 
 卸载方式不变，详见 `UNINSTALL.md`。
+
+## 从 v1.5.0 升级到 v2.0.0
+
+安装方式不变：
+
+```text
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：<解压目录>
+```
+
+v2.0.0 会额外安装：
+
+```text
+.kiro/superpowers-skills/
+.kiro/superpowers-templates/
+.kiro/superpowers-runtime/
+.kiro/scripts/sp-skill-activate.*
+```
+
+旧的日常用法不变。新增 runtime ledger 只用于审计 Superpowers skill 激活与执行证据。

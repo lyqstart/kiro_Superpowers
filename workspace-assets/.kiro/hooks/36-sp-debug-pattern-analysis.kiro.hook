@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 36 - Debug Pattern Analysis",
+  "description": "Require working-vs-broken comparison for hard bugs.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "For debugging work with unclear cause, repeated failure, or similar working path, apply v2.0 Debug Pattern Analysis: find working example, compare broken vs working differences, test one hypothesis at a time, and do not patch without supported root cause."
+  }
+}

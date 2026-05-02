@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 40 - Verification Transcript Capture",
+  "description": "Capture raw verification transcript or sufficient excerpt.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v2.0 Verification Transcript Capture. Save or include verification output with command, working directory, timestamp, exit code, pass/fail/skip when available, raw output path/excerpt, and conclusion. Do not invent counts."
+  }
+}
