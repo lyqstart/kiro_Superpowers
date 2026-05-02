@@ -1,5 +1,25 @@
 # CHANGELOG
 
+## v1.4.0
+
+新增：
+
+1. fresh verification evidence：完成声明前必须提供本次新鲜验证证据，不能用“之前跑过”、subagent 口头成功报告或“测试通过”替代命令输出。
+2. verification result contract：每次 verification 必须包含验证命令、执行时间、exit code、pass count、fail count、skip count、关键输出摘要和失败信息摘要。
+3. completion claim hardening：没有 fresh verification evidence 不允许说 COMPLETE；验证失败必须说 NOT COMPLETE 或 BLOCKED；部分完成必须说 PARTIAL；无法验证必须说 UNVERIFIED。
+4. 新增 hooks：`26-sp-fresh-verification-evidence.kiro.hook`、`27-sp-verification-result-contract.kiro.hook`、`28-sp-completion-claim-hardening.kiro.hook`。
+5. 新增 steering：`fresh-verification-evidence.md` 和对应 workspace steering。
+6. 更新 USAGE / TROUBLESHOOTING / 能力矩阵，明确 verification 失败、缺失、部分完成和无法验证时的输出状态。
+
+保持兼容：
+
+- v0.2-v1.3 的安装方式不变。
+- v0.2-v1.3 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4-v1.3 的 worktree、branch finishing、subagent、review、parallel、task、TDD、refinement、review evidence、debugging deep techniques 能力保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
 ## v1.3.0
 
 新增：

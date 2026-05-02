@@ -1,5 +1,62 @@
 # MIGRATION
 
+## 从 v1.3.0 升级到 v1.4.0
+
+升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。
+
+## 本版变化
+
+v1.4.0 只增强完成声明前的新鲜验证证据、verification result contract 和 completion claim hardening，不改变安装、卸载和日常使用方式。
+
+主要新增：
+
+```text
+power/steering/fresh-verification-evidence.md
+workspace-assets/.kiro/steering/superpowers-fresh-verification-evidence.md
+workspace-assets/.kiro/hooks/26-sp-fresh-verification-evidence.kiro.hook
+workspace-assets/.kiro/hooks/27-sp-verification-result-contract.kiro.hook
+workspace-assets/.kiro/hooks/28-sp-completion-claim-hardening.kiro.hook
+```
+
+主要增强：
+
+```text
+power/steering/task-completion-contract.md
+power/steering/verification-before-completion.md
+power/POWER.md
+USAGE.md
+TROUBLESHOOTING.md
+SUPERPOWERS_CAPABILITY_MATRIX.md
+scripts/validate_package.py
+```
+
+## 保留行为
+
+- 原安装提示不变。
+- 原卸载方式仍然有效。
+- 用户日常仍然只需要说“新增 xxx / 修复 xxx / 继续当前 spec 的下一个任务 / 检查当前任务是否完成”。
+- v0.4-v1.3 的旧能力保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
+## 是否需要重新安装
+
+建议重新安装。因为 v1.4.0 新增 workspace steering/hooks，并增强 completion/verification 规则。
+
+请按原安装方式重新执行：
+
+```text
+请安装这个目录里的 Kiro Superpowers Discipline 到当前项目：<解压目录>
+```
+
+然后在 Kiro Powers 面板确认 Power 指向新版解压目录的 `power/`。
+
+## 卸载方式
+
+卸载方式不变，详见 `UNINSTALL.md`。
+
+---
+
 ## 从 v1.2.0 升级到 v1.3.0
 
 升级方式不变：重新运行安装脚本即可覆盖/补充项目级文件，然后在 Kiro Powers 面板确认 Power 指向新版 `power/` 目录。

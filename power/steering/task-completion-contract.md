@@ -50,3 +50,18 @@
 - 需要外部系统、凭据、数据或环境；
 - 当前 git 状态不安全；
 - worktree/branch 操作需要用户选择。
+
+
+## v1.4 Fresh Verification Evidence
+
+完成声明前必须引用本次新鲜验证证据。验证报告必须包含验证命令、执行时间、exit code、pass/fail/skip count（或成功判断依据）、关键输出摘要和失败信息摘要。
+
+状态扩展为：
+
+- COMPLETE：fresh verification 通过，且 review gate 通过。
+- NOT COMPLETE：验证失败或 blocker/major 未处理。
+- PARTIAL：只完成部分内容，或仍有未验证路径。
+- BLOCKED：缺少环境、凭据、数据、用户确认或 git 安全状态。
+- UNVERIFIED：实现可能完成，但没有本次新鲜验证证据。
+
+禁止用“之前跑过”或 subagent 口头成功报告作为完成依据。

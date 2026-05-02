@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore", "root-cause-tracing", "defense-in-depth", "condition-based-waiting", "multi-component diagnostics", "architecture stop gate", "根因链路", "多层防护", "条件等待", "多组件诊断", "三次修复失败"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外", "Subagent Task Packet", "Subagent Result Contract", "Review Evidence Contract", "BASE_SHA", "HEAD_SHA", "changed files", "任务包", "审查证据", "diff evidence", "worktree hardening", "baseline verification", "worktree metadata", "branch finishing hardening", "DISCARD_WORK", "CLEAN_WORKTREE", "baseline command", "gitignore", "root-cause-tracing", "defense-in-depth", "condition-based-waiting", "multi-component diagnostics", "architecture stop gate", "根因链路", "多层防护", "条件等待", "多组件诊断", "三次修复失败", "fresh verification evidence", "verification result contract", "completion claim hardening", "exit code", "pass count", "fail count", "skip count", "UNVERIFIED", "PARTIAL", "新鲜验证证据", "验证结果合同", "完成声明硬化", "本次验证"
 ]
 author: "ChatGPT generated adapter"
-version: "1.3.0"
+version: "1.4.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -439,3 +439,27 @@ Bugfix/debugging work must go beyond reproduction and minimal repair. Apply deep
 - Three-fix architecture stop gate: after three failed fixes for the same issue, stop patching and reassess requirement, root cause, architecture assumptions, verification method, and whether to return to Kiro spec/design.
 
 `sp-debugger` must output root-cause chain, hypothesis validation, defense-in-depth decision, condition-based waiting decision, multi-component diagnostics when relevant, fix attempt count, and architecture stop-gate status.
+
+
+## v1.4 Fresh Verification Evidence
+
+完成声明前必须提供本次新鲜验证证据。不能使用“之前跑过”、subagent 口头成功报告或“测试通过”这类无命令输出的说法替代验证。
+
+每次 verification 必须包含：
+
+```text
+Verification Evidence: fresh / missing / failed / partial / unavailable
+验证命令：...
+执行时间：...
+Exit code：...
+Pass count：...
+Fail count：...
+Skip count：...
+关键输出摘要：...
+完整失败信息位置或摘要：...
+判断结论：COMPLETE / NOT COMPLETE / PARTIAL / BLOCKED / UNVERIFIED
+```
+
+如果命令没有结构化 pass/fail/skip count，必须说明成功判断依据。没有 fresh verification evidence，不允许说 `COMPLETE`；验证失败必须说 `NOT COMPLETE` 或 `BLOCKED`；只完成部分内容必须说 `PARTIAL`；无法验证必须说 `UNVERIFIED` 并说明原因、风险和下一步。
+
+完整规则见 `fresh-verification-evidence.md`。

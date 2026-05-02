@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 28 - Completion Claim Hardening",
+  "description": "At agent stop, prevent unverified COMPLETE claims and force PARTIAL/BLOCKED/UNVERIFIED when evidence is incomplete.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.4 Completion Claim Hardening. If the response claims COMPLETE but lacks fresh verification evidence, revise status to UNVERIFIED, NOT COMPLETE, PARTIAL, or BLOCKED as appropriate. Verification failure means NOT COMPLETE/BLOCKED. Partial implementation means PARTIAL. Unable to verify means UNVERIFIED with reason, risk, and next step."
+  }
+}

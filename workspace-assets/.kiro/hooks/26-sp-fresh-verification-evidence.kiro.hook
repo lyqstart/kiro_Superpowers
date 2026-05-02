@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 26 - Fresh Verification Evidence",
+  "description": "Before any completion claim, require fresh verification evidence from this task/session; historical runs or verbal subagent success are not enough.",
+  "version": "1",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.4 Fresh Verification Evidence. Before claiming COMPLETE, provide this-run verification command, execution time, exit code, pass/fail/skip counts or success criteria, key output summary, and failure details if any. Do not use prior runs, subagent verbal success, or 'tests passed' without command output. If evidence is missing, mark UNVERIFIED, NOT COMPLETE, or BLOCKED."
+  }
+}

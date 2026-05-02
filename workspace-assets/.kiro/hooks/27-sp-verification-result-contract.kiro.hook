@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 27 - Verification Result Contract",
+  "description": "Require verification reports to include command, execution time, exit code, pass/fail/skip counts, output summary, and clear status.",
+  "version": "1",
+  "when": {
+    "type": "manual"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.4 Verification Result Contract. Output Verification Evidence: fresh / missing / failed / partial / unavailable; verification command; execution time; exit code; pass count; fail count; skip count; key output summary; full failure information location or summary; and final status COMPLETE / NOT COMPLETE / PARTIAL / BLOCKED / UNVERIFIED. If the command lacks structured counts, explain the success criteria used."
+  }
+}

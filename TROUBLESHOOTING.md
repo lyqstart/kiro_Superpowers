@@ -147,3 +147,19 @@ REFACTOR 记录或无需重构原因
 ## Agent 使用固定 sleep 修异步问题
 
 v1.3 要求优先使用 condition-based waiting。正确输出应说明等待条件、超时策略和失败诊断。固定 sleep 只能作为最后的辅助措施，不能作为主要方案。
+
+
+## Kiro 说完成但没有 fresh verification evidence
+
+现象：Kiro 说“已完成”或 `COMPLETE`，但没有提供本次验证命令、执行时间、exit code、pass/fail/skip count 或成功判断依据。
+
+处理：这是 v1.4 要阻止的行为。你应该让 Kiro 重新执行 verification，并要求输出 Verification Result Contract。
+
+正确状态：
+
+- 有本次验证证据且通过：`COMPLETE`
+- 验证失败：`NOT COMPLETE` 或 `BLOCKED`
+- 只完成部分内容：`PARTIAL`
+- 无法验证：`UNVERIFIED`
+
+不要接受“之前跑过”“subagent 说通过了”“测试应该没问题”作为完成依据。

@@ -243,3 +243,29 @@ Questions：...
 涉及前端、后端、数据库、缓存、任务队列、外部 API 多组件时，必须按组件边界诊断，不允许只看一个组件就下结论。
 
 同一个问题连续修复 3 次仍失败时，必须触发 architecture stop gate，停止继续打补丁，并判断是否回到 design/spec 阶段。
+
+
+## v1.4 Fresh Verification Evidence
+
+用户仍然只需要说：
+
+```text
+检查当前任务是否真的完成
+```
+
+Kiro 必须输出本次新鲜验证证据，而不是只说“已完成”：
+
+```text
+Verification Evidence: fresh / missing / failed / partial / unavailable
+验证命令：...
+执行时间：...
+Exit code：...
+Pass count：...
+Fail count：...
+Skip count：...
+关键输出摘要：...
+完整失败信息位置或摘要：...
+判断结论：COMPLETE / NOT COMPLETE / PARTIAL / BLOCKED / UNVERIFIED
+```
+
+没有 fresh verification evidence 时，不能输出 COMPLETE。验证失败输出 NOT COMPLETE 或 BLOCKED；部分完成输出 PARTIAL；无法验证输出 UNVERIFIED 并说明原因。
