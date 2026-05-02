@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 15 - Task Split Review",
+  "description": "When a task is too large or crosses unrelated modules, require numbered split suggestions instead of direct execution.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Review whether the current Kiro task is too large. If it modifies unrelated modules, spans backend/frontend/database/queues, lacks one clear verification loop, or mixes implementation with unrelated refactor/performance/UI work, do not execute. Produce numbered split suggestions with scope and verification for each subtask, and ask the user to choose."
+  }
+}

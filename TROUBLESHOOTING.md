@@ -103,3 +103,15 @@ REFACTOR 记录或无需重构原因
 ```
 
 如果任务确实无法 TDD，Kiro 必须说明例外原因、替代验证方案，并等待用户确认。
+
+
+## Task Refinement Gate 阻塞
+
+如果 Kiro 提示 task 有歧义、太大、缺少 requirement/design 关联、缺少验证命令或缺少完成定义，这是正常保护，不是失败。
+
+处理方式：
+
+1. 选择 Kiro 给出的编号拆分方案；
+2. 回到 Kiro spec 更新 requirements/design/tasks；
+3. 明确当前 task 的范围、不做范围和验证方式；
+4. 不要要求 Kiro “先直接改”，否则会破坏 Superpowers Discipline 的执行纪律。

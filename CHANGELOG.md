@@ -1,6 +1,31 @@
 # CHANGELOG
 
-## v0.9.0
+## v1.0.0
+
+新增：
+
+1. Kiro Task Refinement Gate：执行 task 前检查 task 是否清晰、足够小、可验证，并且绑定 requirement/design/task。
+2. task 执行前必须确认：spec、requirement、design section、task 编号、目标、范围、不做范围、完成定义、验证命令。
+3. task 拆分规则：task 太大、跨多个不相关模块、跨后端/前端/数据库/队列、无法形成清晰验证闭环时，必须给出编号拆分建议。
+4. 增强 hooks：新增 `14-sp-task-refinement-gate.kiro.hook`、`15-sp-task-split-review.kiro.hook`、`16-sp-scope-creep-blocker.kiro.hook`。
+5. 新增 steering：`kiro-task-refinement-gate.md` 和 `superpowers-kiro-task-refinement-gate.md`。
+
+保持兼容：
+
+- v0.2-v0.9 的安装方式不变。
+- v0.2-v0.9 的卸载方式不变。
+- 日常自然语言入口不变。
+- v0.4 worktree 和 branch finishing 保持不变。
+- v0.5 subagent task loop 和 review feedback loop 保持不变。
+- v0.6 parallel agents 安全策略保持不变。
+- v0.7 task execution/completion contract 保持不变。
+- v0.8 稳定化文档和校验保持不变。
+- v0.9 TDD Evidence Contract 保持不变。
+- 不引入 ai_dev_os。
+- 不要求用户写长提示词。
+
+
+## v1.0.0
 
 新增：
 

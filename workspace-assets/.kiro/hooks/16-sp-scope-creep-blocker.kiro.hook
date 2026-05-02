@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 16 - Scope Creep Blocker",
+  "description": "Block out-of-scope work before and during task execution unless the user explicitly confirms a scope change.",
+  "version": "1",
+  "when": {
+    "type": "agentStop"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Check the proposed or completed work against the current task scope. If any unrelated refactor, dependency upgrade, UI adjustment, API/database change, data structure change, or security policy change was added outside the task, mark NOT COMPLETE or BLOCKED unless the user explicitly confirmed it. State the out-of-scope item and recommend updating design/tasks or creating a separate task."
+  }
+}

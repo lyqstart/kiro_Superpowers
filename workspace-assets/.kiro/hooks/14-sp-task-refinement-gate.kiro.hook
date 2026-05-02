@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "SP 14 - Task Refinement Gate",
+  "description": "Before executing a Kiro task, confirm the task is clear, scoped, linked to requirements/design, and has a verification path.",
+  "version": "1",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Apply v1.0 Kiro Task Refinement Gate before implementation. Confirm spec name, requirement, design section, task id, goal, scope, out-of-scope items, completion definition, and verification command. If the task is ambiguous, too large, missing requirement/design linkage, missing verification, missing completion definition, or contains out-of-scope work, mark blocked or needs-split and do not implement."
+  }
+}

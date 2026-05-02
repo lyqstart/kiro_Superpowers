@@ -5,10 +5,10 @@ description: "Automatically apply Superpowers-style execution discipline inside 
 keywords: [
   "superpowers", "discipline", "tdd", "debug", "bugfix", "spec", "requirements", "design", "tasks",
   "implementation", "review", "verification", "continue", "next task", "feature", "fix", "refactor",
-  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据"
+  "新增", "增加", "开发", "实现", "构建", "继续", "下一个任务", "修复", "报错", "异常", "失败", "重构", "测试", "检查", "完成", "验证", "规格", "需求", "设计", "任务", "审查", "worktree", "branch", "finishing", "分支", "合并", "PR", "丢弃", "隔离", "subagent loop", "review feedback", "feedback", "blocker", "major", "minor", "question", "审查反馈", "回修", "闭环", "parallel", "parallel agents", "并行", "安全并行", "Parallel Dispatch Plan", "冲突检查", "execution contract", "task completion contract", "executing plans", "完成定义", "剩余风险", "范围外", "blocker", "verification failed", "TDD Evidence", "RED", "GREEN", "REFACTOR", "失败测试", "通过测试", "TDD证据", "task refinement", "refinement gate", "任务细化", "任务拆分", "完成定义", "验证命令", "范围外"
 ]
 author: "ChatGPT generated adapter"
-version: "0.9.0"
+version: "1.0.0"
 ---
 
 # Superpowers Discipline for Kiro
@@ -346,3 +346,36 @@ REFACTOR：有/无 + 原因 + 验证结果
 - 无法 TDD 时必须说明原因、给出替代验证方案，并等待用户确认。
 
 完整规则见 `tdd-evidence-contract.md`。
+
+
+## v1.0 Kiro Task Refinement Gate
+
+执行任何 Kiro task 前，必须先判断 task 是否足够清晰、足够小、可验证，并且明确绑定 requirement/design/task。
+
+必须确认：
+
+- 当前 spec 名称；
+- 当前 requirement；
+- 当前 design section；
+- 当前 task 编号；
+- 当前 task 目标；
+- 当前 task 范围；
+- 当前 task 不做什么；
+- 当前 task 完成定义；
+- 当前 task 验证命令。
+
+阻止执行的情况：
+
+- task 有歧义；
+- task 缺少 requirement 关联；
+- task 缺少 design 关联；
+- task 缺少验证方式；
+- task 缺少完成定义；
+- task 太大；
+- task 要求顺手做范围外内容。
+
+如果 task 太大，必须给出编号拆分建议。不能直接开写，不能让 subagent 猜测 spec 背景。
+
+Task Refinement Gate 必须早于 worktree gate、TDD Evidence Contract、subagent task loop 和 task completion contract。
+
+完整规则见 `kiro-task-refinement-gate.md`。

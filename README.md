@@ -1,8 +1,8 @@
-# Kiro Superpowers Discipline v0.9.0
+# Kiro Superpowers Discipline v1.0.0
 
 把 Superpowers 的核心执行纪律改造成 Kiro 可用的 Power / Steering / Hooks / Custom Subagents。
 
-**v0.9.0 是 TDD Evidence Contract 版本。** 它只在 v0.8.0 稳定版基础上增强 TDD 证据要求；安装、卸载和日常使用方式保持不变。
+**v1.0.0 是 Kiro Task Refinement Gate 版本。** 它只在 v0.9.0 基础上增强 task 执行前的清晰度、范围、拆分、requirement/design 关联和验证方式检查；安装、卸载和日常使用方式保持不变。
 
 ## 最简单使用
 
@@ -31,9 +31,9 @@ Kiro 应该自动判断流程，并在任务开始时显示短状态标识。
 ## 工作方式
 
 ```text
-新功能 → Feature Spec → requirements/design/tasks → worktree gate → TDD evidence → subagent loop → review → completion contract → branch finishing
-Bugfix → 复现 → 根因 → RED 失败测试/替代验证 → 最小修复 → review → completion contract → branch finishing
-继续任务 → 找当前 spec 未完成 task → task execution contract → worktree gate → subagent loop → completion contract
+新功能 → Feature Spec → requirements/design/tasks → Task Refinement Gate → worktree gate → TDD evidence → subagent loop → review → completion contract → branch finishing
+Bugfix → 复现 → 根因 → Task Refinement Gate → RED 失败测试/替代验证 → 最小修复 → review → completion contract → branch finishing
+继续任务 → 找当前 spec 未完成 task → Task Refinement Gate → task execution contract → worktree gate → subagent loop → completion contract
 审查/验收 → diff + test/build/lint + spec review + code review + completion contract
 并行 → Parallel Dispatch Plan → 冲突检查 → 并行收集/审查 → 统一 review/verification
 ```
@@ -47,6 +47,7 @@ Bugfix → 复现 → 根因 → RED 失败测试/替代验证 → 最小修复 
 - v0.7：Kiro task execution contract、executing-plans 纪律、task completion contract。
 - v0.8：统一术语、统一状态标识、统一 hook 命名、统一 agent 输出格式、整理 README/INSTALL/UNINSTALL/USAGE/TROUBLESHOOTING、增强校验脚本。
 - v0.9：TDD Evidence Contract，要求 RED/GREEN/REFACTOR 证据和 TDD 例外确认。
+- v1.0：Kiro Task Refinement Gate，执行前检查 task 清晰度、范围、requirement/design 关联、完成定义、验证命令和是否需要拆分。
 
 ## 定位
 
